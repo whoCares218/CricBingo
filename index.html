@@ -859,7 +859,7 @@ function renderGrid() {
       // Big IPL team logo
       const logo = TEAM_LOGOS[cell.value];
       if (logo) {
-        div.innerHTML = `<img class="cell-logo" src="public/${logo}" alt="${cell.value}"
+        div.innerHTML = `<img class="cell-logo" src="${logo}" alt="${cell.value}"
           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <span class="cell-label" style="display:none;font-size:.85rem;font-weight:700;color:var(--txt);text-align:center">${cell.value}</span>`;
       } else {
