@@ -826,7 +826,7 @@ function renderGrid() {
     div.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') clickCell(i); };
     const logo = TEAM_LOGOS[cell.value];
     if (cell.type === 'team' && logo) {
-      div.innerHTML = `<img class="cell-logo" src="public/${logo}" alt="${cell.value}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="cell-label" style="display:none;font-size:.82rem;font-weight:700;color:var(--txt)">${cell.value}</span>`;
+      div.innerHTML = `<img class="cell-logo" src="${logo}" alt="${cell.value}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="cell-label" style="display:none;font-size:.82rem;font-weight:700;color:var(--txt)">${cell.value}</span>`;
     } else if (cell.type === 'nation') {
       const flag = FLAG_MAP[cell.value] || '🌍';
       div.innerHTML = `<span style="font-size:2rem;line-height:1">${flag}</span><span class="cell-label" style="font-size:.8rem;color:var(--txt);font-weight:600">${cell.value}</span>`;
