@@ -232,7 +232,6 @@ hr{border:none;border-top:1px solid var(--bdr);margin:22px 0}
   </div>
   <div class="nav-actions">
     <div class="nav-user-wrap">
-      <!-- Clicking profile now opens Stats modal -->
       <div class="username-display" id="usernameDisplay" onclick="showStats()" title="View your stats">
         <span>📊</span><span id="usernameShow">Player</span>
       </div>
@@ -644,11 +643,22 @@ const TEAM_LOGOS = {
   "Rajasthan Royals":"rr.png","Sunrisers Hyderabad":"srh.png","Rising Pune Supergiant":"pune.png",
   "Rising Pune Supergiants":"pune.png","Gujarat Lions":"gl.png"
 };
-const FLAG_MAP = {
-  'India':'🇮🇳','Australia':'🇦🇺','England':'eng','South Africa':'🇿🇦','New Zealand':'🇳🇿',
-  'Pakistan':'🇵🇰','Sri Lanka':'🇱🇰','Bangladesh':'🇧🇩','Afghanistan':'🇦🇫','Zimbabwe':'🇿🇼',
-  'West Indies':'wi','Singapore':'🇸🇬'
-};
+
+// Known nations for flag file lookup
+const NATION_SET = new Set([
+  'India','Australia','England','South Africa','New Zealand',
+  'Pakistan','Sri Lanka','Bangladesh','Afghanistan','Zimbabwe',
+  'West Indies','Singapore'
+]);
+
+// Helper: get flag image tag for a nation using first-3-letter filename
+function nationFlagImg(nation, size) {
+  size = size || '110px';
+  const code = nation.slice(0, 3);
+  return '<img src="' + code + '.png" alt="' + nation + '" '
+    + 'style="width:' + size + ';height:' + size + ';object-fit:contain;border-radius:10px" '
+    + 'onerror="this.style.display=\'none\'">';
+}
 
 const IPL26_DATA   = JSON.parse(document.getElementById('ipl26-raw').textContent);
 const OVERALL_DATA = JSON.parse(document.getElementById('overall-raw').textContent);
@@ -965,52 +975,59 @@ function renderGrid() {
     div.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') clickCell(i); };
 
     if (cell.type === 'team') {
+      // ── Team cell: show team logo ──
       const logo = TEAM_LOGOS[cell.value];
       if (logo) {
-        div.innerHTML = `<img class="cell-logo" src="${logo}" alt="${cell.value}"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <span class="cell-label" style="display:none;font-size:.85rem;font-weight:700;color:var(--txt);text-align:center">${cell.value}</span>`;
+        div.innerHTML = '<img class="cell-logo" src="' + logo + '" alt="' + cell.value + '" '
+          + 'onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
+          + '<span class="cell-label" style="display:none;font-size:.85rem;font-weight:700;color:var(--txt);text-align:center">' + cell.value + '</span>';
       } else {
-        div.innerHTML = `<span style="font-size:2rem">🏏</span>
-          <span class="cell-label" style="font-size:.85rem;font-weight:700;color:var(--txt)">${cell.value}</span>`;
+        div.innerHTML = '<span style="font-size:2rem">🏏</span>'
+          + '<span class="cell-label" style="font-size:.85rem;font-weight:700;color:var(--txt)">' + cell.value + '</span>';
       }
 
     } else if (cell.type === 'nation') {
-      const flag = FLAG_MAP[cell.value] || '🌍';
-      div.innerHTML = `
-        <span style="font-size:3.8rem;line-height:1;display:block">${flag}</span>
-        <span style="font-size:.82rem;font-weight:700;color:var(--txt);margin-top:4px">${cell.value}</span>`;
+      // ── Nation cell: show flag photo (first 3 letters of nation name).png ──
+      const code = cell.value.slice(0, 3);
+      div.innerHTML = '<img src="' + code + '.png" alt="' + cell.value + '" '
+        + 'style="width:110px;height:110px;object-fit:contain;border-radius:10px" '
+        + 'onerror="this.style.display=\'none\';'
+        + 'this.insertAdjacentHTML(\'afterend\',\'<span style=\\\"font-size:.82rem;font-weight:700;color:var(--txt);margin-top:4px\\\">\'  + \'' + cell.value + '\' + \'</span>\')">';
 
     } else if (cell.type === 'trophy') {
-      div.innerHTML = `<span style="font-size:2rem">🏆</span>
-        <span class="cell-label" style="font-size:.68rem;color:var(--acc);font-weight:600">${cell.value}</span>`;
+      div.innerHTML = '<span style="font-size:2rem">🏆</span>'
+        + '<span class="cell-label" style="font-size:.68rem;color:var(--acc);font-weight:600">' + cell.value + '</span>';
 
     } else if (cell.type === 'combo') {
-      // ── FIX: smaller logos so both fit side by side in hard mode ──
+      // ── Combo cell: show logos/flags side by side, NO text label ──
       const parts = cell.value.split('+').map(p => p.trim());
-      let comboHTML = `<div style="display:flex;align-items:center;justify-content:center;gap:5px;width:100%;padding:0 6px;flex-wrap:nowrap">`;
-      parts.forEach((part, idx) => {
+      let comboHTML = '<div style="display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:0 6px;flex-wrap:nowrap">';
+      parts.forEach(function(part, idx) {
         if (idx > 0) {
-          comboHTML += `<span style="font-size:.85rem;color:var(--txt3);font-weight:800;flex-shrink:0">+</span>`;
+          comboHTML += '<span style="font-size:.9rem;color:var(--txt3);font-weight:800;flex-shrink:0">+</span>';
         }
         const logo = TEAM_LOGOS[part];
-        const flag = FLAG_MAP[part];
+        const isNation = NATION_SET.has(part);
         const isTrophy = ['ICC T20 World Cup','ICC ODI World Cup','IPL','WTC'].includes(part);
         if (logo) {
-          // Smaller logos: 44×44 so two fit comfortably
-          comboHTML += `<img style="width:44px;height:44px;object-fit:contain;border-radius:6px;flex-shrink:0"
-            src="${logo}" alt="${part}"
-            onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<span style=\\"font-size:.6rem;color:var(--txt);font-weight:700;flex-shrink:0\\">${part}</span>')">`;
-        } else if (flag) {
-          comboHTML += `<span style="font-size:2rem;line-height:1;flex-shrink:0">${flag}</span>`;
+          // Team logo — slightly smaller so two fit side by side
+          comboHTML += '<img style="width:48px;height:48px;object-fit:contain;border-radius:6px;flex-shrink:0" '
+            + 'src="' + logo + '" alt="' + part + '" '
+            + 'onerror="this.style.display=\'none\';this.insertAdjacentHTML(\'afterend\',\'<span style=\\\"font-size:.6rem;color:var(--txt);font-weight:700;flex-shrink:0\\\">' + part + '</span>\')">';
+        } else if (isNation) {
+          // Nation flag photo
+          const natCode = part.slice(0, 3);
+          comboHTML += '<img src="' + natCode + '.png" alt="' + part + '" '
+            + 'style="width:52px;height:52px;object-fit:contain;border-radius:7px;flex-shrink:0" '
+            + 'onerror="this.style.display=\'none\';this.insertAdjacentHTML(\'afterend\',\'<span style=\\\"font-size:.65rem;color:var(--txt);font-weight:700;flex-shrink:0\\\">' + part + '</span>\')">';
         } else if (isTrophy) {
-          comboHTML += `<span style="font-size:1.6rem;flex-shrink:0">🏆</span>`;
+          comboHTML += '<span style="font-size:1.8rem;flex-shrink:0">🏆</span>';
         } else {
-          comboHTML += `<span style="font-size:.58rem;color:var(--pur);font-weight:600;flex-shrink:0">${part}</span>`;
+          comboHTML += '<span style="font-size:.58rem;color:var(--pur);font-weight:600;flex-shrink:0">' + part + '</span>';
         }
       });
-      comboHTML += `</div>`;
-      comboHTML += `<span style="font-size:.52rem;color:var(--pur);font-weight:700;line-height:1.3;text-align:center;padding:0 6px;margin-top:5px;display:block;word-break:break-word">${cell.value}</span>`;
+      comboHTML += '</div>';
+      // No text label underneath — visuals only
       div.innerHTML = comboHTML;
     }
 
@@ -1124,10 +1141,14 @@ function renderSolutions() {
     const sols = G.solutions[i] || [];
     const fb   = G.filled_by[i];
     const icon = cell.type === 'team' ? '🏏' : cell.type === 'nation' ? '🌍' : '🏆';
-    html += `<div style="margin-bottom:12px">
-      <div style="font-size:.72rem;font-weight:700;color:var(--acc);margin-bottom:5px;font-family:'Outfit',sans-serif">${icon} ${cell.value}${fb ? `<span style="color:var(--green);font-size:.65rem;margin-left:6px">✓ ${fb}</span>` : ''}</div>
-      <div class="solutions-grid">${sols.map(n => `<span class="solution-tag">${n}</span>`).join('') || '<span style="color:var(--txt3);font-size:.78rem">No solutions</span>'}</div>
-    </div>`;
+    html += '<div style="margin-bottom:12px">'
+      + '<div style="font-size:.72rem;font-weight:700;color:var(--acc);margin-bottom:5px;font-family:\'Outfit\',sans-serif">'
+      + icon + ' ' + cell.value
+      + (fb ? '<span style="color:var(--green);font-size:.65rem;margin-left:6px">✓ ' + fb + '</span>' : '')
+      + '</div>'
+      + '<div class="solutions-grid">'
+      + (sols.map(n => '<span class="solution-tag">' + n + '</span>').join('') || '<span style="color:var(--txt3);font-size:.78rem">No solutions</span>')
+      + '</div></div>';
   });
   cont.innerHTML = html;
 }
@@ -1169,15 +1190,15 @@ function renderHistory() {
   sec.style.display = '';
   const diffColors = { easy:'var(--green)', normal:'var(--acc)', hard:'var(--red)' };
   const diffLabels = { easy:'🟢 Easy', normal:'🟡 Normal', hard:'🔴 Hard' };
-  const rows = h.slice(0, 8).map(e => `<tr>
-    <td style="font-family:'Outfit',sans-serif;font-weight:700;color:var(--acc)">${e.score}</td>
-    <td><span style="color:${diffColors[e.difficulty]||'var(--txt2)'}">${diffLabels[e.difficulty]||e.difficulty}</span></td>
-    <td style="color:var(--txt2)">${e.ds==='overall'?'Overall':'IPL 2026'}</td>
-    <td style="color:var(--green)">✅ ${e.correct}</td>
-    <td style="color:var(--txt3);font-size:.75rem">${e.elapsed}s</td>
-    <td style="color:var(--txt3);font-size:.72rem" class="hide-sm">${new Date(e.date).toLocaleDateString()}</td>
-  </tr>`).join('');
-  tbl.innerHTML = `<thead><tr><th>Score</th><th>Diff</th><th>Pool</th><th>Correct</th><th>Time</th><th class="hide-sm">Date</th></tr></thead><tbody>${rows}</tbody>`;
+  const rows = h.slice(0, 8).map(e => '<tr>'
+    + '<td style="font-family:\'Outfit\',sans-serif;font-weight:700;color:var(--acc)">' + e.score + '</td>'
+    + '<td><span style="color:' + (diffColors[e.difficulty]||'var(--txt2)') + '">' + (diffLabels[e.difficulty]||e.difficulty) + '</span></td>'
+    + '<td style="color:var(--txt2)">' + (e.ds==='overall'?'Overall':'IPL 2026') + '</td>'
+    + '<td style="color:var(--green)">✅ ' + e.correct + '</td>'
+    + '<td style="color:var(--txt3);font-size:.75rem">' + e.elapsed + 's</td>'
+    + '<td style="color:var(--txt3);font-size:.72rem" class="hide-sm">' + new Date(e.date).toLocaleDateString() + '</td>'
+    + '</tr>').join('');
+  tbl.innerHTML = '<thead><tr><th>Score</th><th>Diff</th><th>Pool</th><th>Correct</th><th>Time</th><th class="hide-sm">Date</th></tr></thead><tbody>' + rows + '</tbody>';
 }
 
 function renderLeaderboard() {
@@ -1187,16 +1208,16 @@ function renderLeaderboard() {
   const sorted = [...h].sort((a,b) => b.score - a.score);
   const diffColors = {easy:'var(--green)', normal:'var(--acc)', hard:'var(--red)'};
   const diffLabels = {easy:'🟢 Easy', normal:'🟡 Normal', hard:'🔴 Hard'};
-  tbody.innerHTML = sorted.slice(0,20).map((e,i) => `<tr>
-    <td>${i===0?'🥇':i===1?'🥈':i===2?'🥉':`<span style="color:var(--txt3);font-size:.83rem">${i+1}</span>`}</td>
-    <td style="font-family:'Outfit',sans-serif;font-weight:600;color:var(--txt)">${localStorage.getItem('cb-username')||'Player'}</td>
-    <td style="font-family:'Outfit',sans-serif;font-weight:700;color:var(--acc)">${e.score}</td>
-    <td><span style="color:${diffColors[e.difficulty]||'var(--txt2)'}">${diffLabels[e.difficulty]||e.difficulty}</span></td>
-    <td style="color:var(--txt2)">${e.ds==='overall'?'Overall':'IPL 2026'}</td>
-    <td style="color:var(--blue)">${e.accuracy||0}%</td>
-    <td style="color:var(--txt3)" class="hide-sm">${e.elapsed}s</td>
-    <td style="color:var(--txt3);font-size:.72rem" class="hide-sm">${new Date(e.date).toLocaleDateString()}</td>
-  </tr>`).join('');
+  tbody.innerHTML = sorted.slice(0,20).map((e,i) => '<tr>'
+    + '<td>' + (i===0?'🥇':i===1?'🥈':i===2?'🥉':'<span style="color:var(--txt3);font-size:.83rem">'+(i+1)+'</span>') + '</td>'
+    + '<td style="font-family:\'Outfit\',sans-serif;font-weight:600;color:var(--txt)">' + (localStorage.getItem('cb-username')||'Player') + '</td>'
+    + '<td style="font-family:\'Outfit\',sans-serif;font-weight:700;color:var(--acc)">' + e.score + '</td>'
+    + '<td><span style="color:' + (diffColors[e.difficulty]||'var(--txt2)') + '">' + (diffLabels[e.difficulty]||e.difficulty) + '</span></td>'
+    + '<td style="color:var(--txt2)">' + (e.ds==='overall'?'Overall':'IPL 2026') + '</td>'
+    + '<td style="color:var(--blue)">' + (e.accuracy||0) + '%</td>'
+    + '<td style="color:var(--txt3)" class="hide-sm">' + e.elapsed + 's</td>'
+    + '<td style="color:var(--txt3);font-size:.72rem" class="hide-sm">' + new Date(e.date).toLocaleDateString() + '</td>'
+    + '</tr>').join('');
 }
 
 function clearHistory() {
@@ -1275,7 +1296,7 @@ function confirmClearFromStats() {
   toast('History cleared', 'info');
 }
 
-// ── Username helpers (kept for backward compat) ──────────
+// ── Username helpers ──────────────────────────────────────
 function initUser() {
   if (!localStorage.getItem('cb-user-id'))
     localStorage.setItem('cb-user-id', 'user_' + Math.random().toString(36).slice(2,10));
@@ -1313,7 +1334,8 @@ function showView(name) {
   if (name === 'leaderboard') renderLeaderboard();
 }
 
-function toast(msg, type = 'info') {
+function toast(msg, type) {
+  type = type || 'info';
   const d = document.createElement('div');
   d.className = 'toast toast-' + type;
   d.textContent = msg;
@@ -1352,8 +1374,8 @@ function submitContact() {
   if (!email || !email.includes('@')) { toast('Enter a valid email address','warn'); return; }
   if (!subject) { toast('Please select a subject','warn'); return; }
   if (msg.length < 10) { toast('Message too short (min 10 chars)','warn'); return; }
-  const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${msg}`);
-  window.location.href = `mailto:tehm8111@gmail.com?subject=${encodeURIComponent('[Cricket Bingo] '+subject)}&body=${body}`;
+  const body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + msg);
+  window.location.href = 'mailto:tehm8111@gmail.com?subject=' + encodeURIComponent('[Cricket Bingo] '+subject) + '&body=' + body;
   toast('Opening your email client…', 'success');
 }
 
