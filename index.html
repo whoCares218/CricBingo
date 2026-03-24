@@ -13,8 +13,8 @@
 <meta name="robots" content="index, follow">
 
 <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-JGCTR9L8JJ"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-JGCTR9L8JJ');</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VBCYFFTG3D"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VBCYFFTG3D');</script>
 
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9904803540658016" crossorigin="anonymous"></script>
@@ -90,15 +90,12 @@ select.input option{background:var(--sur);color:var(--txt)}
 .stat-value{font-family:var(--font-head);font-size:1.9rem;font-weight:800;line-height:1;letter-spacing:-1px;color:var(--txt)}
 .stat-label{font-size:.68rem;font-weight:600;color:var(--txt3);text-transform:uppercase;letter-spacing:.07em;margin-top:5px}
 .badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:99px;font-size:.68rem;font-weight:700;border:1px solid currentColor;font-family:var(--font-body)}
-/* Timer bar: no width transition since we update every 100ms */
 .timer-wrap{background:var(--sur3);border-radius:99px;height:6px;overflow:hidden}
 .timer-bar{height:100%;border-radius:99px;transition:background .3s}
 .bingo-grid{display:grid;gap:10px;margin:0 auto;width:100%}
 .bingo-grid.size-3{grid-template-columns:repeat(3,1fr);max-width:720px}
 .bingo-grid.size-4{grid-template-columns:repeat(4,1fr);max-width:860px}
-/* Bigger cells for bigger logos */
 .cell{background:var(--sur2);border:1.5px solid var(--bdr);border-radius:var(--r-xl);padding:10px 6px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s,transform .15s,box-shadow .2s;min-height:155px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;user-select:none;overflow:hidden;position:relative}
-/* Bigger team logo */
 .cell-logo{width:115px;height:115px;object-fit:contain;border-radius:10px;transition:transform .2s}
 .cell-label{font-size:.72rem;font-weight:600;color:var(--txt2);line-height:1.3;font-family:var(--font-body)}
 .cell.nation-cell{font-size:.95rem;font-weight:700;color:var(--txt)}
@@ -179,7 +176,6 @@ tr:hover td{background:var(--sur2)}
 .username-display:hover{border-color:var(--acc);color:var(--txt)}
 .username-input-inline{width:130px;padding:5px 9px;font-size:.82rem}
 hr{border:none;border-top:1px solid var(--bdr);margin:22px 0}
-/* Game action buttons — big, spaced, no overlap */
 .game-actions{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px;padding:0 0 4px}
 .game-action-btn{padding:16px 20px;font-size:1rem;font-weight:700;border-radius:var(--r-xl);border:2px solid var(--bdr2);background:var(--sur);cursor:pointer;font-family:var(--font-head);display:flex;align-items:center;justify-content:center;gap:8px;transition:all .18s;letter-spacing:-.2px}
 .game-action-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.3)}
@@ -189,12 +185,29 @@ hr{border:none;border-top:1px solid var(--bdr);margin:22px 0}
 .btn-wc{background:var(--sur2);color:var(--pur);border-color:rgba(155,114,247,.35)}
 .btn-wc:hover:not(:disabled){background:rgba(155,114,247,.08);border-color:var(--pur);box-shadow:0 6px 20px rgba(155,114,247,.2)}
 .btn-quit-row{display:flex;justify-content:center;margin-top:10px}
+
+/* ── Stats Modal ─────────────────────────────────────────── */
+.stats-modal{max-width:420px}
+.stats-avatar{width:64px;height:64px;border-radius:50%;background:var(--acc-dim);border:2px solid rgba(245,166,35,.35);display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 14px}
+.stats-name{font-family:var(--font-head);font-size:1.25rem;font-weight:800;color:var(--txt);text-align:center;margin-bottom:4px}
+.stats-sub{font-size:.75rem;color:var(--txt3);text-align:center;margin-bottom:22px}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.stats-tile{background:var(--sur2);border:1px solid var(--bdr);border-radius:var(--r-lg);padding:16px 12px;text-align:center}
+.stats-tile-val{font-family:var(--font-head);font-size:1.7rem;font-weight:800;letter-spacing:-1px;line-height:1}
+.stats-tile-lbl{font-size:.65rem;font-weight:600;color:var(--txt3);text-transform:uppercase;letter-spacing:.08em;margin-top:5px}
+.stats-best-strip{background:var(--acc-dim);border:1px solid rgba(245,166,35,.22);border-radius:var(--r-lg);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.stats-diff-row{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.stats-diff-chip{flex:1;min-width:80px;background:var(--sur2);border:1px solid var(--bdr);border-radius:var(--r-lg);padding:10px 8px;text-align:center}
+.stats-diff-chip-val{font-family:var(--font-head);font-size:1.1rem;font-weight:800;line-height:1}
+.stats-diff-chip-lbl{font-size:.6rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.07em;margin-top:3px}
+.stats-edit-row{display:flex;gap:8px;align-items:center;margin-top:16px}
+
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--sur3);border-radius:3px}
 @media(max-width:1024px){.footer-grid{grid-template-columns:1fr 1fr}.container,.container-sm{padding:0 20px}}
 @media(max-width:768px){.nav-links{display:none}.nav-burger{display:flex}.nav{padding:0 16px}.grid-3{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr;gap:24px}.hide-sm{display:none}.setup-wrap{padding:24px 14px 60px}}
-@media(max-width:520px){.grid-2{grid-template-columns:1fr}.pool-grid{grid-template-columns:1fr}.settings-row{grid-template-columns:1fr}.cell{min-height:110px;padding:8px 4px}.cell-logo{width:72px;height:72px}.container,.container-sm{padding:0 12px}.modal{padding:24px 18px}.bingo-grid.size-3,.bingo-grid.size-4{max-width:100%}.game-actions{gap:10px}.game-action-btn{padding:13px 12px;font-size:.88rem}}
+@media(max-width:520px){.grid-2{grid-template-columns:1fr}.pool-grid{grid-template-columns:1fr}.settings-row{grid-template-columns:1fr}.cell{min-height:110px;padding:8px 4px}.cell-logo{width:72px;height:72px}.container,.container-sm{padding:0 12px}.modal{padding:24px 18px}.bingo-grid.size-3,.bingo-grid.size-4{max-width:100%}.game-actions{gap:10px}.game-action-btn{padding:13px 12px;font-size:.88rem}.stats-grid{grid-template-columns:1fr 1fr}}
 </style>
 <script>(function(){const t=localStorage.getItem('cb-theme')||'dark';document.documentElement.setAttribute('data-theme',t);})()</script>
 </head>
@@ -213,8 +226,9 @@ hr{border:none;border-top:1px solid var(--bdr);margin:22px 0}
   </div>
   <div class="nav-actions">
     <div class="nav-user-wrap">
-      <div class="username-display" id="usernameDisplay" onclick="editUsername()" title="Click to edit">
-        <span id="usernameShow">Player</span><span style="font-size:.65rem;opacity:.7">✏️</span>
+      <!-- Clicking profile now opens Stats modal -->
+      <div class="username-display" id="usernameDisplay" onclick="showStats()" title="View your stats">
+        <span>📊</span><span id="usernameShow">Player</span>
       </div>
       <input id="usernameInput" class="input username-input-inline" style="display:none" placeholder="Your name" maxlength="24"
         onblur="saveUsername()" onkeydown="if(event.key==='Enter')saveUsername();if(event.key==='Escape')cancelUsername()">
@@ -326,23 +340,19 @@ hr{border:none;border-top:1px solid var(--bdr);margin:22px 0}
     <div class="stat-card"><div class="stat-label">Accuracy</div><div class="stat-value" style="color:var(--blue)" id="ac">—</div></div>
   </div>
 
-  <!-- Timer bar -->
   <div class="timer-wrap mb-1"><div id="tb" class="timer-bar" style="width:100%;background:var(--acc)"></div></div>
   <div class="flex justify-between mb-3" style="font-size:.78rem;color:var(--txt3)">
     <span id="tt" style="font-weight:800;color:var(--txt);font-size:.95rem;font-family:'Outfit',sans-serif">10s</span>
     <span>Player <span id="pidx">1</span> of <span id="ptotal">25</span></span>
   </div>
 
-  <!-- Player card -->
   <div class="player-card mb-4" id="pcard">
     <div id="ps" class="player-hint mb-1" style="min-height:1.2em"> </div>
     <div id="pn" class="player-name" style="min-height:2.2rem"> </div>
   </div>
 
-  <!-- Bingo grid -->
   <div class="bingo-grid size-3" id="grid"></div>
 
-  <!-- Big action buttons, properly below grid -->
   <div class="game-actions">
     <button id="skip-btn" class="game-action-btn btn-skip" onclick="doSkip()">
       ⏭ Skip
@@ -515,6 +525,102 @@ hr{border:none;border-top:1px solid var(--bdr);margin:22px 0}
   </div>
 </div>
 
+<!-- ═══ STATS MODAL ═══ -->
+<div id="stats-modal" class="modal-overlay" style="display:none" onclick="if(event.target===this)closeStats()">
+  <div class="modal stats-modal">
+
+    <!-- Header -->
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px">
+      <div>
+        <div style="font-family:'Outfit',sans-serif;font-size:.7rem;font-weight:700;color:var(--acc);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">📊 Player Profile</div>
+        <div id="stats-username" style="font-family:'Outfit',sans-serif;font-size:1.3rem;font-weight:800;color:var(--txt)">Player</div>
+      </div>
+      <button onclick="closeStats()" style="background:var(--sur2);border:1px solid var(--bdr2);border-radius:var(--r-md);width:32px;height:32px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;color:var(--txt2);flex-shrink:0">✕</button>
+    </div>
+
+    <!-- 4 main stat tiles -->
+    <div class="stats-grid" id="stats-tiles">
+      <div class="stats-tile">
+        <div class="stats-tile-val" style="color:var(--acc)" id="stat-total">0</div>
+        <div class="stats-tile-lbl">Total Games</div>
+      </div>
+      <div class="stats-tile">
+        <div class="stats-tile-val" style="color:var(--green)" id="stat-winpct">0%</div>
+        <div class="stats-tile-lbl">Win Rate</div>
+      </div>
+      <div class="stats-tile">
+        <div class="stats-tile-val" style="color:var(--blue)" id="stat-avgtime">—</div>
+        <div class="stats-tile-lbl">Avg Time</div>
+      </div>
+      <div class="stats-tile">
+        <div class="stats-tile-val" style="color:var(--pur)" id="stat-avgacc">—</div>
+        <div class="stats-tile-lbl">Avg Accuracy</div>
+      </div>
+    </div>
+
+    <!-- Best score banner -->
+    <div class="stats-best-strip" id="stats-best-strip">
+      <div>
+        <div style="font-size:.65rem;font-weight:700;color:var(--acc);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px">🏆 Personal Best</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:1.6rem;font-weight:800;color:var(--acc);letter-spacing:-1px;line-height:1" id="stat-best">0</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:.65rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:2px">Total Points</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:1rem;font-weight:700;color:var(--txt2)" id="stat-totpts">0</div>
+      </div>
+    </div>
+
+    <!-- Per-difficulty breakdown -->
+    <div style="font-size:.65rem;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">By Difficulty</div>
+    <div class="stats-diff-row">
+      <div class="stats-diff-chip">
+        <div class="stats-diff-chip-val" style="color:var(--green)" id="diff-easy-best">—</div>
+        <div class="stats-diff-chip-lbl">🟢 Easy Best</div>
+      </div>
+      <div class="stats-diff-chip">
+        <div class="stats-diff-chip-val" style="color:var(--acc)" id="diff-normal-best">—</div>
+        <div class="stats-diff-chip-lbl">🟡 Normal Best</div>
+      </div>
+      <div class="stats-diff-chip">
+        <div class="stats-diff-chip-val" style="color:var(--red)" id="diff-hard-best">—</div>
+        <div class="stats-diff-chip-lbl">🔴 Hard Best</div>
+      </div>
+    </div>
+
+    <!-- Streak / extra -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px">
+      <div style="background:var(--sur2);border:1px solid var(--bdr);border-radius:var(--r-lg);padding:12px;text-align:center">
+        <div style="font-family:'Outfit',sans-serif;font-size:1.4rem;font-weight:800;color:var(--teal)" id="stat-correct">0</div>
+        <div style="font-size:.62rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.07em;margin-top:3px">✅ Correct</div>
+      </div>
+      <div style="background:var(--sur2);border:1px solid var(--bdr);border-radius:var(--r-lg);padding:12px;text-align:center">
+        <div style="font-family:'Outfit',sans-serif;font-size:1.4rem;font-weight:800;color:var(--red)" id="stat-wrong">0</div>
+        <div style="font-size:.62rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.07em;margin-top:3px">❌ Wrong</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- Edit username row -->
+    <div style="margin-top:14px">
+      <div style="font-size:.65rem;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Edit Name</div>
+      <div class="stats-edit-row">
+        <input id="stats-name-input" class="input" placeholder="Your name" maxlength="24" style="flex:1" onkeydown="if(event.key==='Enter')saveStatsUsername()">
+        <button class="btn btn-primary" onclick="saveStatsUsername()" style="flex-shrink:0">Save</button>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;display:flex;gap:8px">
+      <button class="btn btn-outline w-full" onclick="closeStats();showView('leaderboard')">📋 Full History</button>
+      <button class="btn btn-outline w-full" onclick="confirmClearFromStats()" style="color:var(--red);border-color:rgba(240,82,79,.25)">🗑 Reset</button>
+    </div>
+
+    <div style="text-align:center;margin-top:14px">
+      <span style="font-size:.68rem;color:var(--txt3)">Stored locally in your browser</span>
+    </div>
+  </div>
+</div>
+
 <!-- ═══ EMBEDDED PLAYER DATA ═══ -->
 <script type="application/json" id="ipl26-raw">[{"id":1,"name":"MS Dhoni","nation":"India","team":"Chennai Super Kings","famous":"high"},{"id":2,"name":"Ruturaj Gaikwad","nation":"India","team":"Chennai Super Kings","famous":"medium"},{"id":3,"name":"Sanju Samson","nation":"India","team":"Chennai Super Kings","famous":"medium"},{"id":4,"name":"Ayush Mhatre","nation":"India","team":"Chennai Super Kings","famous":"medium"},{"id":5,"name":"Dewald Brevis","nation":"South Africa","team":"Chennai Super Kings","famous":"medium"},{"id":6,"name":"Shivam Dube","nation":"India","team":"Chennai Super Kings","famous":"medium"},{"id":7,"name":"Urvil Patel","nation":"India","team":"Chennai Super Kings","famous":"low"},{"id":8,"name":"Noor Ahmad","nation":"Afghanistan","team":"Chennai Super Kings","famous":"medium"},{"id":9,"name":"Nathan Ellis","nation":"Australia","team":"Chennai Super Kings","famous":"medium"},{"id":10,"name":"Shreyas Gopal","nation":"India","team":"Chennai Super Kings","famous":"medium"},{"id":11,"name":"Khaleel Ahmed","nation":"India","team":"Chennai Super Kings","famous":"medium"},{"id":12,"name":"Ramakrishna Ghosh","nation":"India","team":"Chennai Super Kings","famous":"low"},{"id":13,"name":"Mukesh Choudhary","nation":"India","team":"Chennai Super Kings","famous":"low"},{"id":14,"name":"Jamie Overton","nation":"England","team":"Chennai Super Kings","famous":"low"},{"id":15,"name":"Gurjapneet Singh","nation":"India","team":"Chennai Super Kings","famous":"medium"},{"id":16,"name":"Anshul Kamboj","nation":"India","team":"Chennai Super Kings","famous":"medium"},{"id":17,"name":"Prashant Veer","nation":"India","team":"Chennai Super Kings","famous":"low"},{"id":18,"name":"Kartik Sharma","nation":"India","team":"Chennai Super Kings","famous":"low"},{"id":19,"name":"Rahul Chahar","nation":"India","team":"Chennai Super Kings","famous":"medium"},{"id":20,"name":"Akeal Hosein","nation":"West Indies","team":"Chennai Super Kings","famous":"low"},{"id":21,"name":"Matt Henry","nation":"New Zealand","team":"Chennai Super Kings","famous":"medium"},{"id":22,"name":"Matthew Short","nation":"Australia","team":"Chennai Super Kings","famous":"low"},{"id":23,"name":"Sarfaraz Khan","nation":"India","team":"Chennai Super Kings","famous":"medium"},{"id":24,"name":"Zak Foulkes","nation":"England","team":"Chennai Super Kings","famous":"low"},{"id":25,"name":"Aman Khan","nation":"India","team":"Chennai Super Kings","famous":"low"},{"id":26,"name":"Nitish Rana","nation":"India","team":"Delhi Capitals","famous":"medium"},{"id":27,"name":"Abishek Porel","nation":"India","team":"Delhi Capitals","famous":"medium"},{"id":28,"name":"Ajay Mandal","nation":"India","team":"Delhi Capitals","famous":"low"},{"id":29,"name":"Ashutosh Sharma","nation":"India","team":"Delhi Capitals","famous":"low"},{"id":30,"name":"Axar Patel","nation":"India","team":"Delhi Capitals","famous":"medium"},{"id":31,"name":"Dushmantha Chameera","nation":"Sri Lanka","team":"Delhi Capitals","famous":"medium"},{"id":32,"name":"Karun Nair","nation":"India","team":"Delhi Capitals","famous":"medium"},{"id":33,"name":"KL Rahul","nation":"India","team":"Delhi Capitals","famous":"high"},{"id":34,"name":"Kuldeep Yadav","nation":"India","team":"Delhi Capitals","famous":"medium"},{"id":35,"name":"Madhav Tiwari","nation":"India","team":"Delhi Capitals","famous":"low"},{"id":36,"name":"Mitchell Starc","nation":"Australia","team":"Delhi Capitals","famous":"high"},{"id":37,"name":"Sameer Rizvi","nation":"India","team":"Delhi Capitals","famous":"low"},{"id":38,"name":"T Natarajan","nation":"India","team":"Delhi Capitals","famous":"medium"},{"id":39,"name":"Tripurana Vijay","nation":"India","team":"Delhi Capitals","famous":"low"},{"id":40,"name":"Tristan Stubbs","nation":"South Africa","team":"Delhi Capitals","famous":"medium"},{"id":41,"name":"Vipraj Nigam","nation":"India","team":"Delhi Capitals","famous":"low"},{"id":42,"name":"Mukesh Kumar","nation":"India","team":"Delhi Capitals","famous":"medium"},{"id":43,"name":"Auqib Nabi","nation":"India","team":"Delhi Capitals","famous":"low"},{"id":44,"name":"Pathum Nissanka","nation":"Sri Lanka","team":"Delhi Capitals","famous":"medium"},{"id":45,"name":"David Miller","nation":"South Africa","team":"Delhi Capitals","famous":"high"},{"id":46,"name":"Ben Duckett","nation":"England","team":"Delhi Capitals","famous":"medium"},{"id":47,"name":"Lungi Ngidi","nation":"South Africa","team":"Delhi Capitals","famous":"medium"},{"id":48,"name":"Kyle Jamieson","nation":"New Zealand","team":"Delhi Capitals","famous":"medium"},{"id":49,"name":"Prithvi Shaw","nation":"India","team":"Delhi Capitals","famous":"medium"},{"id":50,"name":"Sahil Parikh","nation":"India","team":"Delhi Capitals","famous":"low"},{"id":51,"name":"Anuj Rawat","nation":"India","team":"Gujarat Titans","famous":"low"},{"id":52,"name":"Glenn Phillips","nation":"New Zealand","team":"Gujarat Titans","famous":"medium"},{"id":53,"name":"Gurnoor Brar","nation":"India","team":"Gujarat Titans","famous":"medium"},{"id":54,"name":"Ishant Sharma","nation":"India","team":"Gujarat Titans","famous":"high"},{"id":55,"name":"Jayant Yadav","nation":"India","team":"Gujarat Titans","famous":"medium"},{"id":56,"name":"Jos Buttler","nation":"England","team":"Gujarat Titans","famous":"high"},{"id":57,"name":"Kagiso Rabada","nation":"South Africa","team":"Gujarat Titans","famous":"high"},{"id":58,"name":"Kumar Kushagra","nation":"India","team":"Gujarat Titans","famous":"low"},{"id":59,"name":"Manav Suthar","nation":"India","team":"Gujarat Titans","famous":"low"},{"id":60,"name":"Mohammed Siraj","nation":"India","team":"Gujarat Titans","famous":"medium"},{"id":61,"name":"Arshad Khan","nation":"India","team":"Gujarat Titans","famous":"low"},{"id":62,"name":"Nishant Sindhu","nation":"India","team":"Gujarat Titans","famous":"low"},{"id":63,"name":"Prasidh Krishna","nation":"India","team":"Gujarat Titans","famous":"medium"},{"id":64,"name":"R Sai Kishore","nation":"India","team":"Gujarat Titans","famous":"medium"},{"id":65,"name":"Rahul Tewatia","nation":"India","team":"Gujarat Titans","famous":"medium"},{"id":66,"name":"Rashid Khan","nation":"Afghanistan","team":"Gujarat Titans","famous":"high"},{"id":67,"name":"B Sai Sudharsan","nation":"India","team":"Gujarat Titans","famous":"medium"},{"id":68,"name":"M Shahrukh Khan","nation":"India","team":"Gujarat Titans","famous":"low"},{"id":69,"name":"Shubman Gill","nation":"India","team":"Gujarat Titans","famous":"high"},{"id":70,"name":"Washington Sundar","nation":"India","team":"Gujarat Titans","famous":"medium"},{"id":71,"name":"Jason Holder","nation":"West Indies","team":"Gujarat Titans","famous":"medium"},{"id":72,"name":"Tom Banton","nation":"England","team":"Gujarat Titans","famous":"medium"},{"id":73,"name":"Ashok Sharma","nation":"India","team":"Gujarat Titans","famous":"low"},{"id":74,"name":"Luke Wood","nation":"England","team":"Gujarat Titans","famous":"low"},{"id":75,"name":"Prithvi Raj","nation":"India","team":"Gujarat Titans","famous":"low"},{"id":76,"name":"Ajinkya Rahane","nation":"India","team":"Kolkata Knight Riders","famous":"medium"},{"id":77,"name":"Angkrish Raghuvanshi","nation":"India","team":"Kolkata Knight Riders","famous":"medium"},{"id":78,"name":"Anukul Roy","nation":"India","team":"Kolkata Knight Riders","famous":"medium"},{"id":79,"name":"Harshit Rana","nation":"India","team":"Kolkata Knight Riders","famous":"medium"},{"id":80,"name":"Manish Pandey","nation":"India","team":"Kolkata Knight Riders","famous":"medium"},{"id":81,"name":"Ramandeep Singh","nation":"India","team":"Kolkata Knight Riders","famous":"medium"},{"id":82,"name":"Rinku Singh","nation":"India","team":"Kolkata Knight Riders","famous":"medium"},{"id":83,"name":"Rovman Powell","nation":"West Indies","team":"Kolkata Knight Riders","famous":"medium"},{"id":84,"name":"Sunil Narine","nation":"West Indies","team":"Kolkata Knight Riders","famous":"high"},{"id":85,"name":"Umran Malik","nation":"India","team":"Kolkata Knight Riders","famous":"medium"},{"id":86,"name":"Vaibhav Arora","nation":"India","team":"Kolkata Knight Riders","famous":"medium"},{"id":87,"name":"Varun Chakravarthy","nation":"India","team":"Kolkata Knight Riders","famous":"medium"},{"id":88,"name":"Cameron Green","nation":"Australia","team":"Kolkata Knight Riders","famous":"medium"},{"id":89,"name":"Mustafizur Rahman","nation":"Bangladesh","team":"Kolkata Knight Riders","famous":"medium"},{"id":90,"name":"Matheesha Pathirana","nation":"Sri Lanka","team":"Kolkata Knight Riders","famous":"medium"},{"id":91,"name":"Tejasvi Singh","nation":"India","team":"Kolkata Knight Riders","famous":"low"},{"id":92,"name":"Finn Allen","nation":"New Zealand","team":"Kolkata Knight Riders","famous":"medium"},{"id":93,"name":"Rachin Ravindra","nation":"New Zealand","team":"Kolkata Knight Riders","famous":"medium"},{"id":94,"name":"Tim Seifert","nation":"New Zealand","team":"Kolkata Knight Riders","famous":"medium"},{"id":95,"name":"Akash Deep","nation":"India","team":"Kolkata Knight Riders","famous":"medium"},{"id":96,"name":"Rahul Tripathi","nation":"India","team":"Kolkata Knight Riders","famous":"medium"},{"id":97,"name":"Prashant Solanki","nation":"India","team":"Kolkata Knight Riders","famous":"low"},{"id":98,"name":"Kartik Tyagi","nation":"India","team":"Kolkata Knight Riders","famous":"medium"},{"id":99,"name":"Sarthak Ranjan","nation":"India","team":"Kolkata Knight Riders","famous":"low"},{"id":100,"name":"Daksh Kamra","nation":"India","team":"Kolkata Knight Riders","famous":"low"},{"id":101,"name":"Abdul Samad","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":102,"name":"Aiden Markram","nation":"South Africa","team":"Lucknow Super Giants","famous":"high"},{"id":103,"name":"Akash Singh","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":104,"name":"Arjun Tendulkar","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":105,"name":"Arshin Kulkarni","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":106,"name":"Avesh Khan","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":107,"name":"Ayush Badoni","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":108,"name":"Digvesh Rathi","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":109,"name":"Himmat Singh","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":110,"name":"Manimaran Siddharth","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":111,"name":"Matthew Breetzke","nation":"South Africa","team":"Lucknow Super Giants","famous":"medium"},{"id":112,"name":"Mayank Yadav","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":113,"name":"Mohammed Shami","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":114,"name":"Mitchell Marsh","nation":"Australia","team":"Lucknow Super Giants","famous":"high"},{"id":115,"name":"Mohsin Khan","nation":"India","team":"Lucknow Super Giants","famous":"low"},{"id":116,"name":"Nicholas Pooran","nation":"West Indies","team":"Lucknow Super Giants","famous":"high"},{"id":117,"name":"Prince Yadav","nation":"India","team":"Lucknow Super Giants","famous":"low"},{"id":118,"name":"Rishabh Pant","nation":"India","team":"Lucknow Super Giants","famous":"high"},{"id":119,"name":"Shahbaz Ahmed","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":120,"name":"Josh Inglis","nation":"Australia","team":"Lucknow Super Giants","famous":"medium"},{"id":121,"name":"Mukul Choudhary","nation":"India","team":"Lucknow Super Giants","famous":"low"},{"id":122,"name":"Akshat Raghuwanshi","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":123,"name":"Wanindu Hasaranga","nation":"Sri Lanka","team":"Lucknow Super Giants","famous":"medium"},{"id":124,"name":"Anrich Nortje","nation":"South Africa","team":"Lucknow Super Giants","famous":"medium"},{"id":125,"name":"Naman Tiwari","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":126,"name":"Shardul Thakur","nation":"India","team":"Mumbai Indians","famous":"medium"},{"id":127,"name":"Sherfane Rutherford","nation":"West Indies","team":"Mumbai Indians","famous":"medium"},{"id":128,"name":"Mayank Markande","nation":"India","team":"Mumbai Indians","famous":"medium"},{"id":129,"name":"AM Ghazanfar","nation":"Afghanistan","team":"Mumbai Indians","famous":"medium"},{"id":130,"name":"Ashwani Kumar","nation":"India","team":"Mumbai Indians","famous":"low"},{"id":131,"name":"Corbin Bosch","nation":"South Africa","team":"Mumbai Indians","famous":"medium"},{"id":132,"name":"Deepak Chahar","nation":"India","team":"Mumbai Indians","famous":"medium"},{"id":133,"name":"Hardik Pandya","nation":"India","team":"Mumbai Indians","famous":"high"},{"id":134,"name":"Jasprit Bumrah","nation":"India","team":"Mumbai Indians","famous":"high"},{"id":135,"name":"Mitchell Santner","nation":"New Zealand","team":"Mumbai Indians","famous":"medium"},{"id":136,"name":"Naman Dhir","nation":"India","team":"Mumbai Indians","famous":"medium"},{"id":137,"name":"Raghu Sharma","nation":"India","team":"Mumbai Indians","famous":"low"},{"id":138,"name":"Raj Bawa","nation":"India","team":"Mumbai Indians","famous":"medium"},{"id":139,"name":"Robin Minz","nation":"India","team":"Mumbai Indians","famous":"medium"},{"id":140,"name":"Rohit Sharma","nation":"India","team":"Mumbai Indians","famous":"high"},{"id":141,"name":"Ryan Rickelton","nation":"South Africa","team":"Mumbai Indians","famous":"medium"},{"id":142,"name":"Suryakumar Yadav","nation":"India","team":"Mumbai Indians","famous":"high"},{"id":143,"name":"Tilak Varma","nation":"India","team":"Mumbai Indians","famous":"medium"},{"id":144,"name":"Trent Boult","nation":"New Zealand","team":"Mumbai Indians","famous":"high"},{"id":145,"name":"Will Jacks","nation":"England","team":"Mumbai Indians","famous":"medium"},{"id":146,"name":"Quinton de Kock","nation":"South Africa","team":"Mumbai Indians","famous":"high"},{"id":147,"name":"Atharva Ankolekar","nation":"India","team":"Mumbai Indians","famous":"low"},{"id":148,"name":"Mohammad Izhar","nation":"India","team":"Mumbai Indians","famous":"low"},{"id":149,"name":"Danish Malewar","nation":"India","team":"Mumbai Indians","famous":"low"},{"id":150,"name":"Mayank Rawat","nation":"India","team":"Mumbai Indians","famous":"low"},{"id":151,"name":"Arshdeep Singh","nation":"India","team":"Punjab Kings","famous":"medium"},{"id":152,"name":"Azmatullah Omarzai","nation":"Afghanistan","team":"Punjab Kings","famous":"medium"},{"id":153,"name":"Harnoor Singh","nation":"India","team":"Punjab Kings","famous":"medium"},{"id":154,"name":"Harpreet Brar","nation":"India","team":"Punjab Kings","famous":"medium"},{"id":155,"name":"Lockie Ferguson","nation":"New Zealand","team":"Punjab Kings","famous":"medium"},{"id":156,"name":"Marco Jansen","nation":"South Africa","team":"Punjab Kings","famous":"high"},{"id":157,"name":"Marcus Stoinis","nation":"Australia","team":"Punjab Kings","famous":"medium"},{"id":158,"name":"Mitch Owen","nation":"Australia","team":"Punjab Kings","famous":"medium"},{"id":159,"name":"Musheer Khan","nation":"India","team":"Punjab Kings","famous":"medium"},{"id":160,"name":"Nehal Wadhera","nation":"India","team":"Punjab Kings","famous":"medium"},{"id":161,"name":"Prabhsimran Singh","nation":"India","team":"Punjab Kings","famous":"medium"},{"id":162,"name":"Priyansh Arya","nation":"India","team":"Punjab Kings","famous":"medium"},{"id":163,"name":"Pyla Avinash","nation":"India","team":"Punjab Kings","famous":"medium"},{"id":164,"name":"Shashank Singh","nation":"India","team":"Punjab Kings","famous":"medium"},{"id":165,"name":"Shreyas Iyer","nation":"India","team":"Punjab Kings","famous":"medium"},{"id":166,"name":"Suryansh Shedge","nation":"India","team":"Punjab Kings","famous":"low"},{"id":167,"name":"Vishnu Vinod","nation":"India","team":"Punjab Kings","famous":"low"},{"id":168,"name":"Vyshak Vijaykumar","nation":"India","team":"Punjab Kings","famous":"low"},{"id":169,"name":"Xavier Bartlett","nation":"Australia","team":"Punjab Kings","famous":"medium"},{"id":170,"name":"Yash Thakur","nation":"India","team":"Punjab Kings","famous":"medium"},{"id":171,"name":"Yuzvendra Chahal","nation":"India","team":"Punjab Kings","famous":"medium"},{"id":172,"name":"Ben Dwarshuis","nation":"Australia","team":"Punjab Kings","famous":"medium"},{"id":173,"name":"Cooper Connolly","nation":"Australia","team":"Punjab Kings","famous":"medium"},{"id":174,"name":"Vishal Nishad","nation":"India","team":"Punjab Kings","famous":"low"},{"id":175,"name":"Pravin Dubey","nation":"India","team":"Punjab Kings","famous":"medium"},{"id":176,"name":"Donovan Ferreira","nation":"South Africa","team":"Rajasthan Royals","famous":"medium"},{"id":177,"name":"Ravindra Jadeja","nation":"India","team":"Rajasthan Royals","famous":"high"},{"id":178,"name":"Sam Curran","nation":"England","team":"Rajasthan Royals","famous":"high"},{"id":179,"name":"Dhruv Jurel","nation":"India","team":"Rajasthan Royals","famous":"medium"},{"id":180,"name":"Jofra Archer","nation":"England","team":"Rajasthan Royals","famous":"high"},{"id":181,"name":"Kwena Maphaka","nation":"South Africa","team":"Rajasthan Royals","famous":"medium"},{"id":182,"name":"Lhuan-dre Pretorius","nation":"South Africa","team":"Rajasthan Royals","famous":"medium"},{"id":183,"name":"Nandre Burger","nation":"South Africa","team":"Rajasthan Royals","famous":"medium"},{"id":184,"name":"Riyan Parag","nation":"India","team":"Rajasthan Royals","famous":"medium"},{"id":185,"name":"Sandeep Sharma","nation":"India","team":"Rajasthan Royals","famous":"medium"},{"id":186,"name":"Shimron Hetmyer","nation":"West Indies","team":"Rajasthan Royals","famous":"medium"},{"id":187,"name":"Shubham Dubey","nation":"India","team":"Rajasthan Royals","famous":"medium"},{"id":188,"name":"Tushar Deshpande","nation":"India","team":"Rajasthan Royals","famous":"medium"},{"id":189,"name":"Vaibhav Suryavanshi","nation":"India","team":"Rajasthan Royals","famous":"medium"},{"id":190,"name":"Yashasvi Jaiswal","nation":"India","team":"Rajasthan Royals","famous":"high"},{"id":191,"name":"Yudhvir Singh","nation":"India","team":"Rajasthan Royals","famous":"medium"},{"id":192,"name":"Ravi Bishnoi","nation":"India","team":"Rajasthan Royals","famous":"medium"},{"id":193,"name":"Adam Milne","nation":"New Zealand","team":"Rajasthan Royals","famous":"low"},{"id":194,"name":"Ravi Singh","nation":"India","team":"Rajasthan Royals","famous":"low"},{"id":195,"name":"Sushant Mishra","nation":"India","team":"Rajasthan Royals","famous":"low"},{"id":196,"name":"Kuldeep Sen","nation":"India","team":"Rajasthan Royals","famous":"medium"},{"id":197,"name":"Vignesh Puthur","nation":"India","team":"Rajasthan Royals","famous":"low"},{"id":198,"name":"Yash Punja","nation":"India","team":"Rajasthan Royals","famous":"low"},{"id":199,"name":"Aman Rao","nation":"India","team":"Rajasthan Royals","famous":"low"},{"id":200,"name":"Brijesh Sharma","nation":"India","team":"Rajasthan Royals","famous":"low"},{"id":201,"name":"Virat Kohli","nation":"India","team":"Royal Challengers Bengaluru","famous":"high"},{"id":202,"name":"Phil Salt","nation":"England","team":"Royal Challengers Bengaluru","famous":"medium"},{"id":203,"name":"Devdutt Padikkal","nation":"India","team":"Royal Challengers Bengaluru","famous":"medium"},{"id":204,"name":"Rajat Patidar","nation":"India","team":"Royal Challengers Bengaluru","famous":"medium"},{"id":205,"name":"Tim David","nation":"Singapore","team":"Royal Challengers Bengaluru","famous":"high"},{"id":206,"name":"Krunal Pandya","nation":"India","team":"Royal Challengers Bengaluru","famous":"medium"},{"id":207,"name":"Romario Shepherd","nation":"West Indies","team":"Royal Challengers Bengaluru","famous":"medium"},{"id":208,"name":"Jitesh Sharma","nation":"India","team":"Royal Challengers Bengaluru","famous":"medium"},{"id":209,"name":"Bhuvneshwar Kumar","nation":"India","team":"Royal Challengers Bengaluru","famous":"medium"},{"id":210,"name":"Yash Dayal","nation":"India","team":"Royal Challengers Bengaluru","famous":"medium"},{"id":211,"name":"Josh Hazlewood","nation":"Australia","team":"Royal Challengers Bengaluru","famous":"medium"},{"id":212,"name":"Suyash Sharma","nation":"India","team":"Royal Challengers Bengaluru","famous":"low"},{"id":213,"name":"Abhinandan Singh","nation":"India","team":"Royal Challengers Bengaluru","famous":"low"},{"id":214,"name":"Jacob Bethell","nation":"England","team":"Royal Challengers Bengaluru","famous":"medium"},{"id":215,"name":"Nuwan Thushara","nation":"Sri Lanka","team":"Royal Challengers Bengaluru","famous":"low"},{"id":216,"name":"Rasikh Dar","nation":"India","team":"Royal Challengers Bengaluru","famous":"low"},{"id":217,"name":"Swapnil Singh","nation":"India","team":"Royal Challengers Bengaluru","famous":"low"},{"id":218,"name":"Venkatesh Iyer","nation":"India","team":"Royal Challengers Bengaluru","famous":"medium"},{"id":219,"name":"Mangesh Yadav","nation":"India","team":"Royal Challengers Bengaluru","famous":"low"},{"id":220,"name":"Jacob Duffy","nation":"New Zealand","team":"Royal Challengers Bengaluru","famous":"low"},{"id":221,"name":"Jordan Cox","nation":"England","team":"Royal Challengers Bengaluru","famous":"medium"},{"id":222,"name":"Satvik Deswal","nation":"India","team":"Royal Challengers Bengaluru","famous":"low"},{"id":223,"name":"Vicky Ostwal","nation":"India","team":"Royal Challengers Bengaluru","famous":"low"},{"id":224,"name":"Vihaan Malhotra","nation":"India","team":"Royal Challengers Bengaluru","famous":"low"},{"id":225,"name":"Kanishk Chouhan","nation":"India","team":"Royal Challengers Bengaluru","famous":"low"},{"id":226,"name":"Abhishek Sharma","nation":"India","team":"Sunrisers Hyderabad","famous":"medium"},{"id":227,"name":"Aniket Verma","nation":"India","team":"Sunrisers Hyderabad","famous":"low"},{"id":228,"name":"Brydon Carse","nation":"England","team":"Sunrisers Hyderabad","famous":"medium"},{"id":229,"name":"Eshan Malinga","nation":"India","team":"Sunrisers Hyderabad","famous":"low"},{"id":230,"name":"Harsh Dubey","nation":"India","team":"Sunrisers Hyderabad","famous":"medium"},{"id":231,"name":"Harshal Patel","nation":"India","team":"Sunrisers Hyderabad","famous":"medium"},{"id":232,"name":"Heinrich Klaasen","nation":"South Africa","team":"Sunrisers Hyderabad","famous":"high"},{"id":233,"name":"Ishan Kishan","nation":"India","team":"Sunrisers Hyderabad","famous":"medium"},{"id":234,"name":"Jaydev Unadkat","nation":"India","team":"Sunrisers Hyderabad","famous":"medium"},{"id":235,"name":"Kamindu Mendis","nation":"Sri Lanka","team":"Sunrisers Hyderabad","famous":"medium"},{"id":236,"name":"Nitish Kumar Reddy","nation":"India","team":"Sunrisers Hyderabad","famous":"medium"},{"id":237,"name":"Pat Cummins","nation":"Australia","team":"Sunrisers Hyderabad","famous":"high"},{"id":238,"name":"R Smaran","nation":"India","team":"Sunrisers Hyderabad","famous":"low"},{"id":239,"name":"Travis Head","nation":"Australia","team":"Sunrisers Hyderabad","famous":"high"},{"id":240,"name":"Zeeshan Ansari","nation":"India","team":"Sunrisers Hyderabad","famous":"low"},{"id":241,"name":"Liam Livingstone","nation":"England","team":"Sunrisers Hyderabad","famous":"high"},{"id":242,"name":"Jack Edwards","nation":"England","team":"Sunrisers Hyderabad","famous":"low"},{"id":243,"name":"Salil Arora","nation":"India","team":"Sunrisers Hyderabad","famous":"low"},{"id":244,"name":"Shivam Mavi","nation":"India","team":"Sunrisers Hyderabad","famous":"medium"},{"id":245,"name":"Shivang Kumar","nation":"India","team":"Sunrisers Hyderabad","famous":"low"},{"id":246,"name":"Praful Hinge","nation":"India","team":"Sunrisers Hyderabad","famous":"low"},{"id":247,"name":"Amit Kumar","nation":"India","team":"Sunrisers Hyderabad","famous":"low"},{"id":248,"name":"Onkar Tarmale","nation":"India","team":"Sunrisers Hyderabad","famous":"low"},{"id":249,"name":"Sakib Hussain","nation":"India","team":"Sunrisers Hyderabad","famous":"low"},{"id":250,"name":"Karains Fuletra","nation":"India","team":"Sunrisers Hyderabad","famous":"low"}]</script>
 
@@ -527,15 +633,15 @@ hr{border:none;border-top:1px solid var(--bdr);margin:22px 0}
 const TEAM_LOGOS = {
   "Chennai Super Kings":"csk.png","Delhi Capitals":"dc.png","Delhi Daredevils":"dd.png",
   "Deccan Chargers":"deccan.png","Gujarat Titans":"gt.png","Kolkata Knight Riders":"kkr.png",
-  "Kochi Tuskers Kerala":"kochi.jpeg","Lucknow Super Giants":"lsg.png","Mumbai Indians":"mi.png",
+  "Kochi Tuskers Kerala":"kochi.png","Lucknow Super Giants":"lsg.png","Mumbai Indians":"mi.png",
   "Punjab Kings":"pun.png","Royal Challengers Bengaluru":"rcb.png","Royal Challengers Bangalore":"rcb.png",
-  "Rajasthan Royals":"rr.png","Sunrisers Hyderabad":"srh.png","Rising Pune Supergiant":"pune.jpeg",
-  "Rising Pune Supergiants":"pune.jpeg","Gujarat Lions":"gl.png"
+  "Rajasthan Royals":"rr.png","Sunrisers Hyderabad":"srh.png","Rising Pune Supergiant":"pune.png",
+  "Rising Pune Supergiants":"pune.png","Gujarat Lions":"gl.png"
 };
 const FLAG_MAP = {
-  'India':'🇮🇳','Australia':'🇦🇺','England':'🏴󠁧󠁢󠁥󠁮󠁧󠁿','South Africa':'🇿🇦','New Zealand':'🇳🇿',
+  'India':'🇮🇳','Australia':'🇦🇺','England':'eng','South Africa':'🇿🇦','New Zealand':'🇳🇿',
   'Pakistan':'🇵🇰','Sri Lanka':'🇱🇰','Bangladesh':'🇧🇩','Afghanistan':'🇦🇫','Zimbabwe':'🇿🇼',
-  'West Indies':'🏝️','Singapore':'🇸🇬'
+  'West Indies':'wi','Singapore':'🇸🇬'
 };
 
 const IPL26_DATA   = JSON.parse(document.getElementById('ipl26-raw').textContent);
@@ -731,14 +837,12 @@ function showP() {
   startTimer();
 }
 
-// ── Accurate Timer using Date.now() ───────────────────────
 function startTimer() {
   clearInterval(G.tint);
   G.timerStart = Date.now();
   G.tleft = G.tsec;
   G.clickable = true;
   tickTimer();
-  // Update every 100ms for smooth, accurate countdown
   G.tint = setInterval(() => {
     const elapsed = (Date.now() - G.timerStart) / 1000;
     G.tleft = Math.max(0, G.tsec - elapsed);
@@ -758,7 +862,6 @@ function tickTimer() {
   if (!bar) return;
   bar.style.width = pct + '%';
   bar.style.background = pct > 50 ? 'var(--acc)' : pct > 25 ? 'var(--blue)' : 'var(--red)';
-  // Show ceiling so it shows "10" at start and "1" for the last second
   document.getElementById('tt').textContent = Math.ceil(G.tleft) + 's';
 }
 
@@ -856,7 +959,6 @@ function renderGrid() {
     div.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') clickCell(i); };
 
     if (cell.type === 'team') {
-      // Big IPL team logo
       const logo = TEAM_LOGOS[cell.value];
       if (logo) {
         div.innerHTML = `<img class="cell-logo" src="${logo}" alt="${cell.value}"
@@ -868,7 +970,6 @@ function renderGrid() {
       }
 
     } else if (cell.type === 'nation') {
-      // Big nation flag emoji + name
       const flag = FLAG_MAP[cell.value] || '🌍';
       div.innerHTML = `
         <span style="font-size:3.8rem;line-height:1;display:block">${flag}</span>
@@ -879,30 +980,31 @@ function renderGrid() {
         <span class="cell-label" style="font-size:.68rem;color:var(--acc);font-weight:600">${cell.value}</span>`;
 
     } else if (cell.type === 'combo') {
-      // Parse parts: show team logo + flag/trophy side by side
+      // ── FIX: smaller logos so both fit side by side in hard mode ──
       const parts = cell.value.split('+').map(p => p.trim());
-      let comboHTML = `<div style="display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:0 4px">`;
+      let comboHTML = `<div style="display:flex;align-items:center;justify-content:center;gap:5px;width:100%;padding:0 6px;flex-wrap:nowrap">`;
       parts.forEach((part, idx) => {
         if (idx > 0) {
-          comboHTML += `<span style="font-size:.9rem;color:var(--txt3);font-weight:800;flex-shrink:0">+</span>`;
+          comboHTML += `<span style="font-size:.85rem;color:var(--txt3);font-weight:800;flex-shrink:0">+</span>`;
         }
         const logo = TEAM_LOGOS[part];
         const flag = FLAG_MAP[part];
         const isTrophy = ['ICC T20 World Cup','ICC ODI World Cup','IPL','WTC'].includes(part);
         if (logo) {
-          comboHTML += `<img style="width:58px;height:58px;object-fit:contain;border-radius:8px;flex-shrink:0"
-            src="public/${logo}" alt="${part}"
-            onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<span style=\\"font-size:.65rem;color:var(--txt);font-weight:700;flex-shrink:0\\">${part}</span>')">`;
+          // Smaller logos: 44×44 so two fit comfortably
+          comboHTML += `<img style="width:44px;height:44px;object-fit:contain;border-radius:6px;flex-shrink:0"
+            src="${logo}" alt="${part}"
+            onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<span style=\\"font-size:.6rem;color:var(--txt);font-weight:700;flex-shrink:0\\">${part}</span>')">`;
         } else if (flag) {
-          comboHTML += `<span style="font-size:2.4rem;line-height:1;flex-shrink:0">${flag}</span>`;
+          comboHTML += `<span style="font-size:2rem;line-height:1;flex-shrink:0">${flag}</span>`;
         } else if (isTrophy) {
-          comboHTML += `<span style="font-size:2rem;flex-shrink:0">🏆</span>`;
+          comboHTML += `<span style="font-size:1.6rem;flex-shrink:0">🏆</span>`;
         } else {
-          comboHTML += `<span style="font-size:.62rem;color:var(--pur);font-weight:600;flex-shrink:0">${part}</span>`;
+          comboHTML += `<span style="font-size:.58rem;color:var(--pur);font-weight:600;flex-shrink:0">${part}</span>`;
         }
       });
       comboHTML += `</div>`;
-      comboHTML += `<span style="font-size:.54rem;color:var(--pur);font-weight:700;line-height:1.35;text-align:center;padding:0 6px;margin-top:4px;display:block">${cell.value}</span>`;
+      comboHTML += `<span style="font-size:.52rem;color:var(--pur);font-weight:700;line-height:1.3;text-align:center;padding:0 6px;margin-top:5px;display:block;word-break:break-word">${cell.value}</span>`;
       div.innerHTML = comboHTML;
     }
 
@@ -1099,6 +1201,75 @@ function clearHistory() {
   toast('History cleared', 'info');
 }
 
+// ── Stats Modal ────────────────────────────────────────────
+function getStats() {
+  const h = JSON.parse(localStorage.getItem('cb-history') || '[]');
+  const total = h.length;
+  if (!total) return { total:0, winPct:0, avgTime:0, avgAcc:0, bestScore:0, totalPts:0, totalCorrect:0, totalWrong:0, easyBest:0, normalBest:0, hardBest:0 };
+
+  const bestScore   = Math.max(...h.map(e => e.score || 0));
+  const totalPts    = h.reduce((s, e) => s + (e.score || 0), 0);
+  const avgTime     = Math.round(h.reduce((s, e) => s + (e.elapsed || 0), 0) / total);
+  const avgAcc      = Math.round(h.reduce((s, e) => s + (e.accuracy || 0), 0) / total);
+  const wins        = h.filter(e => (e.correct || 0) > (e.wrong || 0)).length;
+  const winPct      = Math.round(wins / total * 100);
+  const totalCorrect = h.reduce((s, e) => s + (e.correct || 0), 0);
+  const totalWrong  = h.reduce((s, e) => s + (e.wrong || 0), 0);
+
+  const byDiff = d => h.filter(e => e.difficulty === d);
+  const diffBest = d => { const g = byDiff(d); return g.length ? Math.max(...g.map(e => e.score || 0)) : null; };
+
+  return { total, winPct, avgTime, avgAcc, bestScore, totalPts, totalCorrect, totalWrong,
+           easyBest: diffBest('easy'), normalBest: diffBest('normal'), hardBest: diffBest('hard') };
+}
+
+function showStats() {
+  const s = getStats();
+  const username = localStorage.getItem('cb-username') || 'Player';
+
+  document.getElementById('stats-username').textContent = username;
+  document.getElementById('stats-name-input').value = username;
+
+  document.getElementById('stat-total').textContent   = s.total;
+  document.getElementById('stat-winpct').textContent  = s.total ? s.winPct + '%' : '—';
+  document.getElementById('stat-avgtime').textContent = s.total ? s.avgTime + 's' : '—';
+  document.getElementById('stat-avgacc').textContent  = s.total ? s.avgAcc + '%' : '—';
+  document.getElementById('stat-best').textContent    = s.bestScore;
+  document.getElementById('stat-totpts').textContent  = s.totalPts.toLocaleString() + ' pts';
+  document.getElementById('stat-correct').textContent = s.totalCorrect;
+  document.getElementById('stat-wrong').textContent   = s.totalWrong;
+
+  document.getElementById('diff-easy-best').textContent   = s.easyBest   !== null ? s.easyBest   : '—';
+  document.getElementById('diff-normal-best').textContent = s.normalBest !== null ? s.normalBest : '—';
+  document.getElementById('diff-hard-best').textContent   = s.hardBest   !== null ? s.hardBest   : '—';
+
+  document.getElementById('stats-modal').style.display = 'flex';
+}
+
+function closeStats() {
+  document.getElementById('stats-modal').style.display = 'none';
+}
+
+function saveStatsUsername() {
+  const val = (document.getElementById('stats-name-input').value || '').trim().slice(0,24);
+  if (val.length >= 1) {
+    localStorage.setItem('cb-username', val);
+    document.getElementById('usernameShow').textContent = val;
+    document.getElementById('stats-username').textContent = val;
+    toast('✅ Name updated!', 'success');
+  }
+}
+
+function confirmClearFromStats() {
+  if (!confirm('Reset all history and stats?')) return;
+  localStorage.removeItem('cb-history');
+  renderHistory();
+  renderLeaderboard();
+  closeStats();
+  toast('History cleared', 'info');
+}
+
+// ── Username helpers (kept for backward compat) ──────────
 function initUser() {
   if (!localStorage.getItem('cb-user-id'))
     localStorage.setItem('cb-user-id', 'user_' + Math.random().toString(36).slice(2,10));
@@ -1162,7 +1333,9 @@ document.addEventListener('click', e => {
   const m = document.getElementById('mmenu');
   if (m && !m.contains(e.target) && !e.target.closest('#navBurger')) m.classList.remove('open');
 });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeMenu(); cancelUsername(); } });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeMenu(); cancelUsername(); closeStats(); }
+});
 
 function submitContact() {
   const name    = document.getElementById('fname').value.trim();
