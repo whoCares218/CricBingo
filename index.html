@@ -655,7 +655,7 @@ const NATION_SET = new Set([
 function nationFlagImg(nation, size) {
   size = size || '110px';
   const code = nation.slice(0, 3);
-  return '<img src="' + code + '.png" alt="' + nation + '" '
+  return '<img src="' + code + '.png"'
     + 'style="width:' + size + ';height:' + size + ';object-fit:contain;border-radius:10px" '
     + 'onerror="this.style.display=\'none\'">';
 }
