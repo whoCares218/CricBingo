@@ -13,13 +13,11 @@
 <meta name="robots" content="index, follow">
 
 <!-- Google Analytics -->
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JGCTR9L8JJ"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-JGCTR9L8JJ');
 </script>
 <!-- Google AdSense -->
@@ -191,8 +189,6 @@ hr{border:none;border-top:1px solid var(--bdr);margin:22px 0}
 .btn-wc{background:var(--sur2);color:var(--pur);border-color:rgba(155,114,247,.35)}
 .btn-wc:hover:not(:disabled){background:rgba(155,114,247,.08);border-color:var(--pur);box-shadow:0 6px 20px rgba(155,114,247,.2)}
 .btn-quit-row{display:flex;justify-content:center;margin-top:10px}
-
-/* ── Stats Modal ─────────────────────────────────────────── */
 .stats-modal{max-width:420px}
 .stats-avatar{width:64px;height:64px;border-radius:50%;background:var(--acc-dim);border:2px solid rgba(245,166,35,.35);display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 14px}
 .stats-name{font-family:var(--font-head);font-size:1.25rem;font-weight:800;color:var(--txt);text-align:center;margin-bottom:4px}
@@ -207,7 +203,6 @@ hr{border:none;border-top:1px solid var(--bdr);margin:22px 0}
 .stats-diff-chip-val{font-family:var(--font-head);font-size:1.1rem;font-weight:800;line-height:1}
 .stats-diff-chip-lbl{font-size:.6rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.07em;margin-top:3px}
 .stats-edit-row{display:flex;gap:8px;align-items:center;margin-top:16px}
-
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--sur3);border-radius:3px}
@@ -533,8 +528,6 @@ hr{border:none;border-top:1px solid var(--bdr);margin:22px 0}
 <!-- ═══ STATS MODAL ═══ -->
 <div id="stats-modal" class="modal-overlay" style="display:none" onclick="if(event.target===this)closeStats()">
   <div class="modal stats-modal">
-
-    <!-- Header -->
     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px">
       <div>
         <div style="font-family:'Outfit',sans-serif;font-size:.7rem;font-weight:700;color:var(--acc);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">📊 Player Profile</div>
@@ -542,28 +535,12 @@ hr{border:none;border-top:1px solid var(--bdr);margin:22px 0}
       </div>
       <button onclick="closeStats()" style="background:var(--sur2);border:1px solid var(--bdr2);border-radius:var(--r-md);width:32px;height:32px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;color:var(--txt2);flex-shrink:0">✕</button>
     </div>
-
-    <!-- 4 main stat tiles -->
     <div class="stats-grid" id="stats-tiles">
-      <div class="stats-tile">
-        <div class="stats-tile-val" style="color:var(--acc)" id="stat-total">0</div>
-        <div class="stats-tile-lbl">Total Games</div>
-      </div>
-      <div class="stats-tile">
-        <div class="stats-tile-val" style="color:var(--green)" id="stat-winpct">0%</div>
-        <div class="stats-tile-lbl">Win Rate</div>
-      </div>
-      <div class="stats-tile">
-        <div class="stats-tile-val" style="color:var(--blue)" id="stat-avgtime">—</div>
-        <div class="stats-tile-lbl">Avg Time</div>
-      </div>
-      <div class="stats-tile">
-        <div class="stats-tile-val" style="color:var(--pur)" id="stat-avgacc">—</div>
-        <div class="stats-tile-lbl">Avg Accuracy</div>
-      </div>
+      <div class="stats-tile"><div class="stats-tile-val" style="color:var(--acc)" id="stat-total">0</div><div class="stats-tile-lbl">Total Games</div></div>
+      <div class="stats-tile"><div class="stats-tile-val" style="color:var(--green)" id="stat-winpct">0%</div><div class="stats-tile-lbl">Win Rate</div></div>
+      <div class="stats-tile"><div class="stats-tile-val" style="color:var(--blue)" id="stat-avgtime">—</div><div class="stats-tile-lbl">Avg Time</div></div>
+      <div class="stats-tile"><div class="stats-tile-val" style="color:var(--pur)" id="stat-avgacc">—</div><div class="stats-tile-lbl">Avg Accuracy</div></div>
     </div>
-
-    <!-- Best score banner -->
     <div class="stats-best-strip" id="stats-best-strip">
       <div>
         <div style="font-size:.65rem;font-weight:700;color:var(--acc);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px">🏆 Personal Best</div>
@@ -574,25 +551,12 @@ hr{border:none;border-top:1px solid var(--bdr);margin:22px 0}
         <div style="font-family:'Outfit',sans-serif;font-size:1rem;font-weight:700;color:var(--txt2)" id="stat-totpts">0</div>
       </div>
     </div>
-
-    <!-- Per-difficulty breakdown -->
     <div style="font-size:.65rem;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">By Difficulty</div>
     <div class="stats-diff-row">
-      <div class="stats-diff-chip">
-        <div class="stats-diff-chip-val" style="color:var(--green)" id="diff-easy-best">—</div>
-        <div class="stats-diff-chip-lbl">🟢 Easy Best</div>
-      </div>
-      <div class="stats-diff-chip">
-        <div class="stats-diff-chip-val" style="color:var(--acc)" id="diff-normal-best">—</div>
-        <div class="stats-diff-chip-lbl">🟡 Normal Best</div>
-      </div>
-      <div class="stats-diff-chip">
-        <div class="stats-diff-chip-val" style="color:var(--red)" id="diff-hard-best">—</div>
-        <div class="stats-diff-chip-lbl">🔴 Hard Best</div>
-      </div>
+      <div class="stats-diff-chip"><div class="stats-diff-chip-val" style="color:var(--green)" id="diff-easy-best">—</div><div class="stats-diff-chip-lbl">🟢 Easy Best</div></div>
+      <div class="stats-diff-chip"><div class="stats-diff-chip-val" style="color:var(--acc)" id="diff-normal-best">—</div><div class="stats-diff-chip-lbl">🟡 Normal Best</div></div>
+      <div class="stats-diff-chip"><div class="stats-diff-chip-val" style="color:var(--red)" id="diff-hard-best">—</div><div class="stats-diff-chip-lbl">🔴 Hard Best</div></div>
     </div>
-
-    <!-- Streak / extra -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px">
       <div style="background:var(--sur2);border:1px solid var(--bdr);border-radius:var(--r-lg);padding:12px;text-align:center">
         <div style="font-family:'Outfit',sans-serif;font-size:1.4rem;font-weight:800;color:var(--teal)" id="stat-correct">0</div>
@@ -603,10 +567,7 @@ hr{border:none;border-top:1px solid var(--bdr);margin:22px 0}
         <div style="font-size:.62rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.07em;margin-top:3px">❌ Wrong</div>
       </div>
     </div>
-
     <hr>
-
-    <!-- Edit username row -->
     <div style="margin-top:14px">
       <div style="font-size:.65rem;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Edit Name</div>
       <div class="stats-edit-row">
@@ -614,12 +575,10 @@ hr{border:none;border-top:1px solid var(--bdr);margin:22px 0}
         <button class="btn btn-primary" onclick="saveStatsUsername()" style="flex-shrink:0">Save</button>
       </div>
     </div>
-
     <div style="margin-top:16px;display:flex;gap:8px">
       <button class="btn btn-outline w-full" onclick="closeStats();showView('leaderboard')">📋 Full History</button>
       <button class="btn btn-outline w-full" onclick="confirmClearFromStats()" style="color:var(--red);border-color:rgba(240,82,79,.25)">🗑 Reset</button>
     </div>
-
     <div style="text-align:center;margin-top:14px">
       <span style="font-size:.68rem;color:var(--txt3)">Stored locally in your browser</span>
     </div>
@@ -644,21 +603,11 @@ const TEAM_LOGOS = {
   "Rising Pune Supergiants":"pune.png","Gujarat Lions":"gl.png"
 };
 
-// Known nations for flag file lookup
 const NATION_SET = new Set([
   'India','Australia','England','South Africa','New Zealand',
   'Pakistan','Sri Lanka','Bangladesh','Afghanistan','Zimbabwe',
   'West Indies','Singapore'
 ]);
-
-// Helper: get flag image tag for a nation using first-3-letter filename
-function nationFlagImg(nation, size) {
-  size = size || '110px';
-  const code = nation.slice(0, 3);
-  return '<img src="' + code + '.png"'
-    + 'style="width:' + size + ';height:' + size + ';object-fit:contain;border-radius:10px" '
-    + 'onerror="this.style.display=\'none\'">';
-}
 
 const IPL26_DATA   = JSON.parse(document.getElementById('ipl26-raw').textContent);
 const OVERALL_DATA = JSON.parse(document.getElementById('overall-raw').textContent);
@@ -813,7 +762,6 @@ function createGameState(ds, gridSize, difficulty, seed = null) {
   return { ds, gridSize, difficulty, players, grid, solutions };
 }
 
-// ── Game Runtime State ─────────────────────────────────────
 const G = {
   ds:'overall', gs:3, diff:'normal', mode:'solo',
   players:[], grid:[], solutions:{},
@@ -961,81 +909,119 @@ function quitGame() {
   end('quit');
 }
 
-// ── Render Grid ────────────────────────────────────────────
+// ── Render Grid — DOM-based, no inline onerror string escaping issues ──────
+function makeImg(src, alt, w, h, radius) {
+  var img = document.createElement('img');
+  img.src = src;
+  img.alt = alt;
+  img.style.width = w;
+  img.style.height = h;
+  img.style.objectFit = 'contain';
+  img.style.borderRadius = radius || '10px';
+  img.style.flexShrink = '0';
+  return img;
+}
+
 function renderGrid() {
-  const grid = document.getElementById('grid');
+  var grid = document.getElementById('grid');
   grid.className = 'bingo-grid size-' + G.gs;
   grid.innerHTML = '';
-  G.grid.forEach((cell, i) => {
-    const div = document.createElement('div');
+
+  G.grid.forEach(function(cell, i) {
+    var div = document.createElement('div');
     div.className = 'cell ' + cell.type + '-cell';
     div.id = 'c' + i;
     div.tabIndex = 0;
-    div.onclick = () => clickCell(i);
-    div.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') clickCell(i); };
+    div.onclick = function() { clickCell(i); };
+    div.onkeydown = function(e) { if (e.key === 'Enter' || e.key === ' ') clickCell(i); };
 
     if (cell.type === 'team') {
-      // ── Team cell: show team logo ──
-      const logo = TEAM_LOGOS[cell.value];
+      var logo = TEAM_LOGOS[cell.value];
       if (logo) {
-        div.innerHTML = '<img class="cell-logo" src="' + logo + '" alt="' + cell.value + '" '
-          + 'onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
-          + '<span class="cell-label" style="display:none;font-size:.85rem;font-weight:700;color:var(--txt);text-align:center">' + cell.value + '</span>';
+        var img = makeImg(logo, cell.value, '115px', '115px', '10px');
+        img.className = 'cell-logo';
+        var fallback = document.createElement('span');
+        fallback.className = 'cell-label';
+        fallback.style.cssText = 'display:none;font-size:.85rem;font-weight:700;color:var(--txt);text-align:center';
+        fallback.textContent = cell.value;
+        img.onerror = function() { this.style.display = 'none'; fallback.style.display = 'flex'; };
+        div.appendChild(img);
+        div.appendChild(fallback);
       } else {
-        div.innerHTML = '<span style="font-size:2rem">🏏</span>'
-          + '<span class="cell-label" style="font-size:.85rem;font-weight:700;color:var(--txt)">' + cell.value + '</span>';
+        var icon = document.createElement('span');
+        icon.style.fontSize = '2rem';
+        icon.textContent = '🏏';
+        var lbl = document.createElement('span');
+        lbl.className = 'cell-label';
+        lbl.style.cssText = 'font-size:.85rem;font-weight:700;color:var(--txt)';
+        lbl.textContent = cell.value;
+        div.appendChild(icon);
+        div.appendChild(lbl);
       }
 
     } else if (cell.type === 'nation') {
-      // ── Nation cell: show flag photo (first 3 letters of nation name).png ──
-      const code = cell.value.slice(0, 3);
-      div.innerHTML = '<img src="' + code + '.png" alt="' + cell.value + '" '
-        + 'style="width:110px;height:110px;object-fit:contain;border-radius:10px" '
-        + 'onerror="this.style.display=\'none\';'
-        + 'this.insertAdjacentHTML(\'afterend\',\'<span style=\\\"font-size:.82rem;font-weight:700;color:var(--txt);margin-top:4px\\\">\'  + \'' + cell.value + '\' + \'</span>\')">';
+      // Show only the flag image — no text fallback to avoid leaking names
+      var code = cell.value.slice(0, 3);
+      var img = makeImg(code + '.png', cell.value, '110px', '110px', '10px');
+      img.onerror = function() { this.style.display = 'none'; };
+      div.appendChild(img);
 
     } else if (cell.type === 'trophy') {
-      div.innerHTML = '<span style="font-size:2rem">🏆</span>'
-        + '<span class="cell-label" style="font-size:.68rem;color:var(--acc);font-weight:600">' + cell.value + '</span>';
+      var icon = document.createElement('span');
+      icon.style.fontSize = '2rem';
+      icon.textContent = '🏆';
+      var lbl = document.createElement('span');
+      lbl.className = 'cell-label';
+      lbl.style.cssText = 'font-size:.68rem;color:var(--acc);font-weight:600';
+      lbl.textContent = cell.value;
+      div.appendChild(icon);
+      div.appendChild(lbl);
 
     } else if (cell.type === 'combo') {
-      // ── Combo cell: show logos/flags side by side, NO text label ──
-      const parts = cell.value.split('+').map(p => p.trim());
-      let comboHTML = '<div style="display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:0 6px;flex-wrap:nowrap">';
+      var parts = cell.value.split('+').map(function(p) { return p.trim(); });
+      var wrap = document.createElement('div');
+      wrap.style.cssText = 'display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:0 6px;flex-wrap:nowrap';
+
       parts.forEach(function(part, idx) {
         if (idx > 0) {
-          comboHTML += '<span style="font-size:.9rem;color:var(--txt3);font-weight:800;flex-shrink:0">+</span>';
+          var plus = document.createElement('span');
+          plus.style.cssText = 'font-size:.9rem;color:var(--txt3);font-weight:800;flex-shrink:0';
+          plus.textContent = '+';
+          wrap.appendChild(plus);
         }
-        const logo = TEAM_LOGOS[part];
-        const isNation = NATION_SET.has(part);
-        const isTrophy = ['ICC T20 World Cup','ICC ODI World Cup','IPL','WTC'].includes(part);
+        var logo = TEAM_LOGOS[part];
+        var isNation = NATION_SET.has(part);
+        var isTrophy = ['ICC T20 World Cup', 'ICC ODI World Cup', 'IPL', 'WTC'].includes(part);
+
         if (logo) {
-          // Team logo — slightly smaller so two fit side by side
-          comboHTML += '<img style="width:48px;height:48px;object-fit:contain;border-radius:6px;flex-shrink:0" '
-            + 'src="' + logo + '" alt="' + part + '" '
-            + 'onerror="this.style.display=\'none\';this.insertAdjacentHTML(\'afterend\',\'<span style=\\\"font-size:.6rem;color:var(--txt);font-weight:700;flex-shrink:0\\\">' + part + '</span>\')">';
+          var img = makeImg(logo, part, '48px', '48px', '6px');
+          img.onerror = function() { this.style.display = 'none'; };
+          wrap.appendChild(img);
         } else if (isNation) {
-          // Nation flag photo
-          const natCode = part.slice(0, 3);
-          comboHTML += '<img src="' + natCode + '.png" alt="' + part + '" '
-            + 'style="width:52px;height:52px;object-fit:contain;border-radius:7px;flex-shrink:0" '
-            + 'onerror="this.style.display=\'none\';this.insertAdjacentHTML(\'afterend\',\'<span style=\\\"font-size:.65rem;color:var(--txt);font-weight:700;flex-shrink:0\\\">' + part + '</span>\')">';
+          var natCode = part.slice(0, 3);
+          var img = makeImg(natCode + '.png', part, '52px', '52px', '7px');
+          img.onerror = function() { this.style.display = 'none'; };
+          wrap.appendChild(img);
         } else if (isTrophy) {
-          comboHTML += '<span style="font-size:1.8rem;flex-shrink:0">🏆</span>';
+          var s = document.createElement('span');
+          s.style.cssText = 'font-size:1.8rem;flex-shrink:0';
+          s.textContent = '🏆';
+          wrap.appendChild(s);
         } else {
-          comboHTML += '<span style="font-size:.58rem;color:var(--pur);font-weight:600;flex-shrink:0">' + part + '</span>';
+          var s = document.createElement('span');
+          s.style.cssText = 'font-size:.58rem;color:var(--pur);font-weight:600;flex-shrink:0';
+          s.textContent = part;
+          wrap.appendChild(s);
         }
       });
-      comboHTML += '</div>';
-      // No text label underneath — visuals only
-      div.innerHTML = comboHTML;
+
+      div.appendChild(wrap);
     }
 
     grid.appendChild(div);
   });
 }
 
-// ── Start Game ─────────────────────────────────────────────
 window.startGame = function(ds, gs, diff, mode, seed) {
   ds   = ds   || selPool;
   gs   = parseInt(gs   || document.getElementById('cfg-gs').value  || 3);
@@ -1087,7 +1073,6 @@ function startDaily() {
   window.startGame('overall', 3, 'normal', 'daily', seed);
 }
 
-// ── End Game ───────────────────────────────────────────────
 function end(reason) {
   if (G.ended) return;
   G.ended = true;
@@ -1153,7 +1138,6 @@ function renderSolutions() {
   cont.innerHTML = html;
 }
 
-// ── Home Controls ──────────────────────────────────────────
 let selPool = 'overall';
 function selectPool(src, card) {
   selPool = src;
@@ -1228,12 +1212,10 @@ function clearHistory() {
   toast('History cleared', 'info');
 }
 
-// ── Stats Modal ────────────────────────────────────────────
 function getStats() {
   const h = JSON.parse(localStorage.getItem('cb-history') || '[]');
   const total = h.length;
   if (!total) return { total:0, winPct:0, avgTime:0, avgAcc:0, bestScore:0, totalPts:0, totalCorrect:0, totalWrong:0, easyBest:0, normalBest:0, hardBest:0 };
-
   const bestScore   = Math.max(...h.map(e => e.score || 0));
   const totalPts    = h.reduce((s, e) => s + (e.score || 0), 0);
   const avgTime     = Math.round(h.reduce((s, e) => s + (e.elapsed || 0), 0) / total);
@@ -1242,10 +1224,8 @@ function getStats() {
   const winPct      = Math.round(wins / total * 100);
   const totalCorrect = h.reduce((s, e) => s + (e.correct || 0), 0);
   const totalWrong  = h.reduce((s, e) => s + (e.wrong || 0), 0);
-
   const byDiff = d => h.filter(e => e.difficulty === d);
   const diffBest = d => { const g = byDiff(d); return g.length ? Math.max(...g.map(e => e.score || 0)) : null; };
-
   return { total, winPct, avgTime, avgAcc, bestScore, totalPts, totalCorrect, totalWrong,
            easyBest: diffBest('easy'), normalBest: diffBest('normal'), hardBest: diffBest('hard') };
 }
@@ -1253,10 +1233,8 @@ function getStats() {
 function showStats() {
   const s = getStats();
   const username = localStorage.getItem('cb-username') || 'Player';
-
   document.getElementById('stats-username').textContent = username;
   document.getElementById('stats-name-input').value = username;
-
   document.getElementById('stat-total').textContent   = s.total;
   document.getElementById('stat-winpct').textContent  = s.total ? s.winPct + '%' : '—';
   document.getElementById('stat-avgtime').textContent = s.total ? s.avgTime + 's' : '—';
@@ -1265,11 +1243,9 @@ function showStats() {
   document.getElementById('stat-totpts').textContent  = s.totalPts.toLocaleString() + ' pts';
   document.getElementById('stat-correct').textContent = s.totalCorrect;
   document.getElementById('stat-wrong').textContent   = s.totalWrong;
-
   document.getElementById('diff-easy-best').textContent   = s.easyBest   !== null ? s.easyBest   : '—';
   document.getElementById('diff-normal-best').textContent = s.normalBest !== null ? s.normalBest : '—';
   document.getElementById('diff-hard-best').textContent   = s.hardBest   !== null ? s.hardBest   : '—';
-
   document.getElementById('stats-modal').style.display = 'flex';
 }
 
@@ -1296,7 +1272,6 @@ function confirmClearFromStats() {
   toast('History cleared', 'info');
 }
 
-// ── Username helpers ──────────────────────────────────────
 function initUser() {
   if (!localStorage.getItem('cb-user-id'))
     localStorage.setItem('cb-user-id', 'user_' + Math.random().toString(36).slice(2,10));
