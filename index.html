@@ -203,6 +203,10 @@ hr{border:none;border-top:1px solid var(--bdr);margin:22px 0}
 .stats-diff-chip-val{font-family:var(--font-head);font-size:1.1rem;font-weight:800;line-height:1}
 .stats-diff-chip-lbl{font-size:.6rem;color:var(--txt3);text-transform:uppercase;letter-spacing:.07em;margin-top:3px}
 .stats-edit-row{display:flex;gap:8px;align-items:center;margin-top:16px}
+#loading-screen{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9000;gap:16px}
+#loading-screen p{font-size:.9rem;color:var(--txt2)}
+.spinner{width:36px;height:36px;border:3px solid var(--bdr2);border-top-color:var(--acc);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--sur3);border-radius:3px}
@@ -213,6 +217,12 @@ hr{border:none;border-top:1px solid var(--bdr);margin:22px 0}
 <script>(function(){const t=localStorage.getItem('cb-theme')||'dark';document.documentElement.setAttribute('data-theme',t);})()</script>
 </head>
 <body>
+
+<!-- Loading screen shown while JSON files load -->
+<div id="loading-screen">
+  <div class="spinner"></div>
+  <p>Loading player data…</p>
+</div>
 
 <nav class="nav">
   <div class="nav-logo" onclick="showView('home')">
@@ -248,7 +258,7 @@ hr{border:none;border-top:1px solid var(--bdr);margin:22px 0}
 </div>
 
 <!-- ═══ HOME ═══ -->
-<div id="view-home">
+<div id="view-home" style="display:none">
 <div class="setup-wrap">
   <div style="text-align:center;padding:32px 0 20px;width:100%">
     <span class="hero-badge">⚡ IPL Cricket Quiz Game</span>
@@ -585,15 +595,30 @@ hr{border:none;border-top:1px solid var(--bdr);margin:22px 0}
   </div>
 </div>
 
-<!-- ═══ EMBEDDED PLAYER DATA ═══ -->
-<script type="application/json" id="ipl26-raw">[{"id":1,"name":"MS Dhoni","nation":"India","team":"Chennai Super Kings","famous":"high"},{"id":2,"name":"Ruturaj Gaikwad","nation":"India","team":"Chennai Super Kings","famous":"medium"},{"id":3,"name":"Sanju Samson","nation":"India","team":"Chennai Super Kings","famous":"medium"},{"id":4,"name":"Ayush Mhatre","nation":"India","team":"Chennai Super Kings","famous":"medium"},{"id":5,"name":"Dewald Brevis","nation":"South Africa","team":"Chennai Super Kings","famous":"medium"},{"id":6,"name":"Shivam Dube","nation":"India","team":"Chennai Super Kings","famous":"medium"},{"id":7,"name":"Urvil Patel","nation":"India","team":"Chennai Super Kings","famous":"low"},{"id":8,"name":"Noor Ahmad","nation":"Afghanistan","team":"Chennai Super Kings","famous":"medium"},{"id":9,"name":"Nathan Ellis","nation":"Australia","team":"Chennai Super Kings","famous":"medium"},{"id":10,"name":"Shreyas Gopal","nation":"India","team":"Chennai Super Kings","famous":"medium"},{"id":11,"name":"Khaleel Ahmed","nation":"India","team":"Chennai Super Kings","famous":"medium"},{"id":12,"name":"Ramakrishna Ghosh","nation":"India","team":"Chennai Super Kings","famous":"low"},{"id":13,"name":"Mukesh Choudhary","nation":"India","team":"Chennai Super Kings","famous":"low"},{"id":14,"name":"Jamie Overton","nation":"England","team":"Chennai Super Kings","famous":"low"},{"id":15,"name":"Gurjapneet Singh","nation":"India","team":"Chennai Super Kings","famous":"medium"},{"id":16,"name":"Anshul Kamboj","nation":"India","team":"Chennai Super Kings","famous":"medium"},{"id":17,"name":"Prashant Veer","nation":"India","team":"Chennai Super Kings","famous":"low"},{"id":18,"name":"Kartik Sharma","nation":"India","team":"Chennai Super Kings","famous":"low"},{"id":19,"name":"Rahul Chahar","nation":"India","team":"Chennai Super Kings","famous":"medium"},{"id":20,"name":"Akeal Hosein","nation":"West Indies","team":"Chennai Super Kings","famous":"low"},{"id":21,"name":"Matt Henry","nation":"New Zealand","team":"Chennai Super Kings","famous":"medium"},{"id":22,"name":"Matthew Short","nation":"Australia","team":"Chennai Super Kings","famous":"low"},{"id":23,"name":"Sarfaraz Khan","nation":"India","team":"Chennai Super Kings","famous":"medium"},{"id":24,"name":"Zak Foulkes","nation":"England","team":"Chennai Super Kings","famous":"low"},{"id":25,"name":"Aman Khan","nation":"India","team":"Chennai Super Kings","famous":"low"},{"id":26,"name":"Nitish Rana","nation":"India","team":"Delhi Capitals","famous":"medium"},{"id":27,"name":"Abishek Porel","nation":"India","team":"Delhi Capitals","famous":"medium"},{"id":28,"name":"Ajay Mandal","nation":"India","team":"Delhi Capitals","famous":"low"},{"id":29,"name":"Ashutosh Sharma","nation":"India","team":"Delhi Capitals","famous":"low"},{"id":30,"name":"Axar Patel","nation":"India","team":"Delhi Capitals","famous":"medium"},{"id":31,"name":"Dushmantha Chameera","nation":"Sri Lanka","team":"Delhi Capitals","famous":"medium"},{"id":32,"name":"Karun Nair","nation":"India","team":"Delhi Capitals","famous":"medium"},{"id":33,"name":"KL Rahul","nation":"India","team":"Delhi Capitals","famous":"high"},{"id":34,"name":"Kuldeep Yadav","nation":"India","team":"Delhi Capitals","famous":"medium"},{"id":35,"name":"Madhav Tiwari","nation":"India","team":"Delhi Capitals","famous":"low"},{"id":36,"name":"Mitchell Starc","nation":"Australia","team":"Delhi Capitals","famous":"high"},{"id":37,"name":"Sameer Rizvi","nation":"India","team":"Delhi Capitals","famous":"low"},{"id":38,"name":"T Natarajan","nation":"India","team":"Delhi Capitals","famous":"medium"},{"id":39,"name":"Tripurana Vijay","nation":"India","team":"Delhi Capitals","famous":"low"},{"id":40,"name":"Tristan Stubbs","nation":"South Africa","team":"Delhi Capitals","famous":"medium"},{"id":41,"name":"Vipraj Nigam","nation":"India","team":"Delhi Capitals","famous":"low"},{"id":42,"name":"Mukesh Kumar","nation":"India","team":"Delhi Capitals","famous":"medium"},{"id":43,"name":"Auqib Nabi","nation":"India","team":"Delhi Capitals","famous":"low"},{"id":44,"name":"Pathum Nissanka","nation":"Sri Lanka","team":"Delhi Capitals","famous":"medium"},{"id":45,"name":"David Miller","nation":"South Africa","team":"Delhi Capitals","famous":"high"},{"id":46,"name":"Ben Duckett","nation":"England","team":"Delhi Capitals","famous":"medium"},{"id":47,"name":"Lungi Ngidi","nation":"South Africa","team":"Delhi Capitals","famous":"medium"},{"id":48,"name":"Kyle Jamieson","nation":"New Zealand","team":"Delhi Capitals","famous":"medium"},{"id":49,"name":"Prithvi Shaw","nation":"India","team":"Delhi Capitals","famous":"medium"},{"id":50,"name":"Sahil Parikh","nation":"India","team":"Delhi Capitals","famous":"low"},{"id":51,"name":"Anuj Rawat","nation":"India","team":"Gujarat Titans","famous":"low"},{"id":52,"name":"Glenn Phillips","nation":"New Zealand","team":"Gujarat Titans","famous":"medium"},{"id":53,"name":"Gurnoor Brar","nation":"India","team":"Gujarat Titans","famous":"medium"},{"id":54,"name":"Ishant Sharma","nation":"India","team":"Gujarat Titans","famous":"high"},{"id":55,"name":"Jayant Yadav","nation":"India","team":"Gujarat Titans","famous":"medium"},{"id":56,"name":"Jos Buttler","nation":"England","team":"Gujarat Titans","famous":"high"},{"id":57,"name":"Kagiso Rabada","nation":"South Africa","team":"Gujarat Titans","famous":"high"},{"id":58,"name":"Kumar Kushagra","nation":"India","team":"Gujarat Titans","famous":"low"},{"id":59,"name":"Manav Suthar","nation":"India","team":"Gujarat Titans","famous":"low"},{"id":60,"name":"Mohammed Siraj","nation":"India","team":"Gujarat Titans","famous":"medium"},{"id":61,"name":"Arshad Khan","nation":"India","team":"Gujarat Titans","famous":"low"},{"id":62,"name":"Nishant Sindhu","nation":"India","team":"Gujarat Titans","famous":"low"},{"id":63,"name":"Prasidh Krishna","nation":"India","team":"Gujarat Titans","famous":"medium"},{"id":64,"name":"R Sai Kishore","nation":"India","team":"Gujarat Titans","famous":"medium"},{"id":65,"name":"Rahul Tewatia","nation":"India","team":"Gujarat Titans","famous":"medium"},{"id":66,"name":"Rashid Khan","nation":"Afghanistan","team":"Gujarat Titans","famous":"high"},{"id":67,"name":"B Sai Sudharsan","nation":"India","team":"Gujarat Titans","famous":"medium"},{"id":68,"name":"M Shahrukh Khan","nation":"India","team":"Gujarat Titans","famous":"low"},{"id":69,"name":"Shubman Gill","nation":"India","team":"Gujarat Titans","famous":"high"},{"id":70,"name":"Washington Sundar","nation":"India","team":"Gujarat Titans","famous":"medium"},{"id":71,"name":"Jason Holder","nation":"West Indies","team":"Gujarat Titans","famous":"medium"},{"id":72,"name":"Tom Banton","nation":"England","team":"Gujarat Titans","famous":"medium"},{"id":73,"name":"Ashok Sharma","nation":"India","team":"Gujarat Titans","famous":"low"},{"id":74,"name":"Luke Wood","nation":"England","team":"Gujarat Titans","famous":"low"},{"id":75,"name":"Prithvi Raj","nation":"India","team":"Gujarat Titans","famous":"low"},{"id":76,"name":"Ajinkya Rahane","nation":"India","team":"Kolkata Knight Riders","famous":"medium"},{"id":77,"name":"Angkrish Raghuvanshi","nation":"India","team":"Kolkata Knight Riders","famous":"medium"},{"id":78,"name":"Anukul Roy","nation":"India","team":"Kolkata Knight Riders","famous":"medium"},{"id":79,"name":"Harshit Rana","nation":"India","team":"Kolkata Knight Riders","famous":"medium"},{"id":80,"name":"Manish Pandey","nation":"India","team":"Kolkata Knight Riders","famous":"medium"},{"id":81,"name":"Ramandeep Singh","nation":"India","team":"Kolkata Knight Riders","famous":"medium"},{"id":82,"name":"Rinku Singh","nation":"India","team":"Kolkata Knight Riders","famous":"medium"},{"id":83,"name":"Rovman Powell","nation":"West Indies","team":"Kolkata Knight Riders","famous":"medium"},{"id":84,"name":"Sunil Narine","nation":"West Indies","team":"Kolkata Knight Riders","famous":"high"},{"id":85,"name":"Umran Malik","nation":"India","team":"Kolkata Knight Riders","famous":"medium"},{"id":86,"name":"Vaibhav Arora","nation":"India","team":"Kolkata Knight Riders","famous":"medium"},{"id":87,"name":"Varun Chakravarthy","nation":"India","team":"Kolkata Knight Riders","famous":"medium"},{"id":88,"name":"Cameron Green","nation":"Australia","team":"Kolkata Knight Riders","famous":"medium"},{"id":89,"name":"Mustafizur Rahman","nation":"Bangladesh","team":"Kolkata Knight Riders","famous":"medium"},{"id":90,"name":"Matheesha Pathirana","nation":"Sri Lanka","team":"Kolkata Knight Riders","famous":"medium"},{"id":91,"name":"Tejasvi Singh","nation":"India","team":"Kolkata Knight Riders","famous":"low"},{"id":92,"name":"Finn Allen","nation":"New Zealand","team":"Kolkata Knight Riders","famous":"medium"},{"id":93,"name":"Rachin Ravindra","nation":"New Zealand","team":"Kolkata Knight Riders","famous":"medium"},{"id":94,"name":"Tim Seifert","nation":"New Zealand","team":"Kolkata Knight Riders","famous":"medium"},{"id":95,"name":"Akash Deep","nation":"India","team":"Kolkata Knight Riders","famous":"medium"},{"id":96,"name":"Rahul Tripathi","nation":"India","team":"Kolkata Knight Riders","famous":"medium"},{"id":97,"name":"Prashant Solanki","nation":"India","team":"Kolkata Knight Riders","famous":"low"},{"id":98,"name":"Kartik Tyagi","nation":"India","team":"Kolkata Knight Riders","famous":"medium"},{"id":99,"name":"Sarthak Ranjan","nation":"India","team":"Kolkata Knight Riders","famous":"low"},{"id":100,"name":"Daksh Kamra","nation":"India","team":"Kolkata Knight Riders","famous":"low"},{"id":101,"name":"Abdul Samad","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":102,"name":"Aiden Markram","nation":"South Africa","team":"Lucknow Super Giants","famous":"high"},{"id":103,"name":"Akash Singh","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":104,"name":"Arjun Tendulkar","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":105,"name":"Arshin Kulkarni","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":106,"name":"Avesh Khan","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":107,"name":"Ayush Badoni","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":108,"name":"Digvesh Rathi","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":109,"name":"Himmat Singh","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":110,"name":"Manimaran Siddharth","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":111,"name":"Matthew Breetzke","nation":"South Africa","team":"Lucknow Super Giants","famous":"medium"},{"id":112,"name":"Mayank Yadav","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":113,"name":"Mohammed Shami","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":114,"name":"Mitchell Marsh","nation":"Australia","team":"Lucknow Super Giants","famous":"high"},{"id":115,"name":"Mohsin Khan","nation":"India","team":"Lucknow Super Giants","famous":"low"},{"id":116,"name":"Nicholas Pooran","nation":"West Indies","team":"Lucknow Super Giants","famous":"high"},{"id":117,"name":"Prince Yadav","nation":"India","team":"Lucknow Super Giants","famous":"low"},{"id":118,"name":"Rishabh Pant","nation":"India","team":"Lucknow Super Giants","famous":"high"},{"id":119,"name":"Shahbaz Ahmed","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":120,"name":"Josh Inglis","nation":"Australia","team":"Lucknow Super Giants","famous":"medium"},{"id":121,"name":"Mukul Choudhary","nation":"India","team":"Lucknow Super Giants","famous":"low"},{"id":122,"name":"Akshat Raghuwanshi","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":123,"name":"Wanindu Hasaranga","nation":"Sri Lanka","team":"Lucknow Super Giants","famous":"medium"},{"id":124,"name":"Anrich Nortje","nation":"South Africa","team":"Lucknow Super Giants","famous":"medium"},{"id":125,"name":"Naman Tiwari","nation":"India","team":"Lucknow Super Giants","famous":"medium"},{"id":126,"name":"Shardul Thakur","nation":"India","team":"Mumbai Indians","famous":"medium"},{"id":127,"name":"Sherfane Rutherford","nation":"West Indies","team":"Mumbai Indians","famous":"medium"},{"id":128,"name":"Mayank Markande","nation":"India","team":"Mumbai Indians","famous":"medium"},{"id":129,"name":"AM Ghazanfar","nation":"Afghanistan","team":"Mumbai Indians","famous":"medium"},{"id":130,"name":"Ashwani Kumar","nation":"India","team":"Mumbai Indians","famous":"low"},{"id":131,"name":"Corbin Bosch","nation":"South Africa","team":"Mumbai Indians","famous":"medium"},{"id":132,"name":"Deepak Chahar","nation":"India","team":"Mumbai Indians","famous":"medium"},{"id":133,"name":"Hardik Pandya","nation":"India","team":"Mumbai Indians","famous":"high"},{"id":134,"name":"Jasprit Bumrah","nation":"India","team":"Mumbai Indians","famous":"high"},{"id":135,"name":"Mitchell Santner","nation":"New Zealand","team":"Mumbai Indians","famous":"medium"},{"id":136,"name":"Naman Dhir","nation":"India","team":"Mumbai Indians","famous":"medium"},{"id":137,"name":"Raghu Sharma","nation":"India","team":"Mumbai Indians","famous":"low"},{"id":138,"name":"Raj Bawa","nation":"India","team":"Mumbai Indians","famous":"medium"},{"id":139,"name":"Robin Minz","nation":"India","team":"Mumbai Indians","famous":"medium"},{"id":140,"name":"Rohit Sharma","nation":"India","team":"Mumbai Indians","famous":"high"},{"id":141,"name":"Ryan Rickelton","nation":"South Africa","team":"Mumbai Indians","famous":"medium"},{"id":142,"name":"Suryakumar Yadav","nation":"India","team":"Mumbai Indians","famous":"high"},{"id":143,"name":"Tilak Varma","nation":"India","team":"Mumbai Indians","famous":"medium"},{"id":144,"name":"Trent Boult","nation":"New Zealand","team":"Mumbai Indians","famous":"high"},{"id":145,"name":"Will Jacks","nation":"England","team":"Mumbai Indians","famous":"medium"},{"id":146,"name":"Quinton de Kock","nation":"South Africa","team":"Mumbai Indians","famous":"high"},{"id":147,"name":"Atharva Ankolekar","nation":"India","team":"Mumbai Indians","famous":"low"},{"id":148,"name":"Mohammad Izhar","nation":"India","team":"Mumbai Indians","famous":"low"},{"id":149,"name":"Danish Malewar","nation":"India","team":"Mumbai Indians","famous":"low"},{"id":150,"name":"Mayank Rawat","nation":"India","team":"Mumbai Indians","famous":"low"},{"id":151,"name":"Arshdeep Singh","nation":"India","team":"Punjab Kings","famous":"medium"},{"id":152,"name":"Azmatullah Omarzai","nation":"Afghanistan","team":"Punjab Kings","famous":"medium"},{"id":153,"name":"Harnoor Singh","nation":"India","team":"Punjab Kings","famous":"medium"},{"id":154,"name":"Harpreet Brar","nation":"India","team":"Punjab Kings","famous":"medium"},{"id":155,"name":"Lockie Ferguson","nation":"New Zealand","team":"Punjab Kings","famous":"medium"},{"id":156,"name":"Marco Jansen","nation":"South Africa","team":"Punjab Kings","famous":"high"},{"id":157,"name":"Marcus Stoinis","nation":"Australia","team":"Punjab Kings","famous":"medium"},{"id":158,"name":"Mitch Owen","nation":"Australia","team":"Punjab Kings","famous":"medium"},{"id":159,"name":"Musheer Khan","nation":"India","team":"Punjab Kings","famous":"medium"},{"id":160,"name":"Nehal Wadhera","nation":"India","team":"Punjab Kings","famous":"medium"},{"id":161,"name":"Prabhsimran Singh","nation":"India","team":"Punjab Kings","famous":"medium"},{"id":162,"name":"Priyansh Arya","nation":"India","team":"Punjab Kings","famous":"medium"},{"id":163,"name":"Pyla Avinash","nation":"India","team":"Punjab Kings","famous":"medium"},{"id":164,"name":"Shashank Singh","nation":"India","team":"Punjab Kings","famous":"medium"},{"id":165,"name":"Shreyas Iyer","nation":"India","team":"Punjab Kings","famous":"medium"},{"id":166,"name":"Suryansh Shedge","nation":"India","team":"Punjab Kings","famous":"low"},{"id":167,"name":"Vishnu Vinod","nation":"India","team":"Punjab Kings","famous":"low"},{"id":168,"name":"Vyshak Vijaykumar","nation":"India","team":"Punjab Kings","famous":"low"},{"id":169,"name":"Xavier Bartlett","nation":"Australia","team":"Punjab Kings","famous":"medium"},{"id":170,"name":"Yash Thakur","nation":"India","team":"Punjab Kings","famous":"medium"},{"id":171,"name":"Yuzvendra Chahal","nation":"India","team":"Punjab Kings","famous":"medium"},{"id":172,"name":"Ben Dwarshuis","nation":"Australia","team":"Punjab Kings","famous":"medium"},{"id":173,"name":"Cooper Connolly","nation":"Australia","team":"Punjab Kings","famous":"medium"},{"id":174,"name":"Vishal Nishad","nation":"India","team":"Punjab Kings","famous":"low"},{"id":175,"name":"Pravin Dubey","nation":"India","team":"Punjab Kings","famous":"medium"},{"id":176,"name":"Donovan Ferreira","nation":"South Africa","team":"Rajasthan Royals","famous":"medium"},{"id":177,"name":"Ravindra Jadeja","nation":"India","team":"Rajasthan Royals","famous":"high"},{"id":178,"name":"Sam Curran","nation":"England","team":"Rajasthan Royals","famous":"high"},{"id":179,"name":"Dhruv Jurel","nation":"India","team":"Rajasthan Royals","famous":"medium"},{"id":180,"name":"Jofra Archer","nation":"England","team":"Rajasthan Royals","famous":"high"},{"id":181,"name":"Kwena Maphaka","nation":"South Africa","team":"Rajasthan Royals","famous":"medium"},{"id":182,"name":"Lhuan-dre Pretorius","nation":"South Africa","team":"Rajasthan Royals","famous":"medium"},{"id":183,"name":"Nandre Burger","nation":"South Africa","team":"Rajasthan Royals","famous":"medium"},{"id":184,"name":"Riyan Parag","nation":"India","team":"Rajasthan Royals","famous":"medium"},{"id":185,"name":"Sandeep Sharma","nation":"India","team":"Rajasthan Royals","famous":"medium"},{"id":186,"name":"Shimron Hetmyer","nation":"West Indies","team":"Rajasthan Royals","famous":"medium"},{"id":187,"name":"Shubham Dubey","nation":"India","team":"Rajasthan Royals","famous":"medium"},{"id":188,"name":"Tushar Deshpande","nation":"India","team":"Rajasthan Royals","famous":"medium"},{"id":189,"name":"Vaibhav Suryavanshi","nation":"India","team":"Rajasthan Royals","famous":"medium"},{"id":190,"name":"Yashasvi Jaiswal","nation":"India","team":"Rajasthan Royals","famous":"high"},{"id":191,"name":"Yudhvir Singh","nation":"India","team":"Rajasthan Royals","famous":"medium"},{"id":192,"name":"Ravi Bishnoi","nation":"India","team":"Rajasthan Royals","famous":"medium"},{"id":193,"name":"Adam Milne","nation":"New Zealand","team":"Rajasthan Royals","famous":"low"},{"id":194,"name":"Ravi Singh","nation":"India","team":"Rajasthan Royals","famous":"low"},{"id":195,"name":"Sushant Mishra","nation":"India","team":"Rajasthan Royals","famous":"low"},{"id":196,"name":"Kuldeep Sen","nation":"India","team":"Rajasthan Royals","famous":"medium"},{"id":197,"name":"Vignesh Puthur","nation":"India","team":"Rajasthan Royals","famous":"low"},{"id":198,"name":"Yash Punja","nation":"India","team":"Rajasthan Royals","famous":"low"},{"id":199,"name":"Aman Rao","nation":"India","team":"Rajasthan Royals","famous":"low"},{"id":200,"name":"Brijesh Sharma","nation":"India","team":"Rajasthan Royals","famous":"low"},{"id":201,"name":"Virat Kohli","nation":"India","team":"Royal Challengers Bengaluru","famous":"high"},{"id":202,"name":"Phil Salt","nation":"England","team":"Royal Challengers Bengaluru","famous":"medium"},{"id":203,"name":"Devdutt Padikkal","nation":"India","team":"Royal Challengers Bengaluru","famous":"medium"},{"id":204,"name":"Rajat Patidar","nation":"India","team":"Royal Challengers Bengaluru","famous":"medium"},{"id":205,"name":"Tim David","nation":"Singapore","team":"Royal Challengers Bengaluru","famous":"high"},{"id":206,"name":"Krunal Pandya","nation":"India","team":"Royal Challengers Bengaluru","famous":"medium"},{"id":207,"name":"Romario Shepherd","nation":"West Indies","team":"Royal Challengers Bengaluru","famous":"medium"},{"id":208,"name":"Jitesh Sharma","nation":"India","team":"Royal Challengers Bengaluru","famous":"medium"},{"id":209,"name":"Bhuvneshwar Kumar","nation":"India","team":"Royal Challengers Bengaluru","famous":"medium"},{"id":210,"name":"Yash Dayal","nation":"India","team":"Royal Challengers Bengaluru","famous":"medium"},{"id":211,"name":"Josh Hazlewood","nation":"Australia","team":"Royal Challengers Bengaluru","famous":"medium"},{"id":212,"name":"Suyash Sharma","nation":"India","team":"Royal Challengers Bengaluru","famous":"low"},{"id":213,"name":"Abhinandan Singh","nation":"India","team":"Royal Challengers Bengaluru","famous":"low"},{"id":214,"name":"Jacob Bethell","nation":"England","team":"Royal Challengers Bengaluru","famous":"medium"},{"id":215,"name":"Nuwan Thushara","nation":"Sri Lanka","team":"Royal Challengers Bengaluru","famous":"low"},{"id":216,"name":"Rasikh Dar","nation":"India","team":"Royal Challengers Bengaluru","famous":"low"},{"id":217,"name":"Swapnil Singh","nation":"India","team":"Royal Challengers Bengaluru","famous":"low"},{"id":218,"name":"Venkatesh Iyer","nation":"India","team":"Royal Challengers Bengaluru","famous":"medium"},{"id":219,"name":"Mangesh Yadav","nation":"India","team":"Royal Challengers Bengaluru","famous":"low"},{"id":220,"name":"Jacob Duffy","nation":"New Zealand","team":"Royal Challengers Bengaluru","famous":"low"},{"id":221,"name":"Jordan Cox","nation":"England","team":"Royal Challengers Bengaluru","famous":"medium"},{"id":222,"name":"Satvik Deswal","nation":"India","team":"Royal Challengers Bengaluru","famous":"low"},{"id":223,"name":"Vicky Ostwal","nation":"India","team":"Royal Challengers Bengaluru","famous":"low"},{"id":224,"name":"Vihaan Malhotra","nation":"India","team":"Royal Challengers Bengaluru","famous":"low"},{"id":225,"name":"Kanishk Chouhan","nation":"India","team":"Royal Challengers Bengaluru","famous":"low"},{"id":226,"name":"Abhishek Sharma","nation":"India","team":"Sunrisers Hyderabad","famous":"medium"},{"id":227,"name":"Aniket Verma","nation":"India","team":"Sunrisers Hyderabad","famous":"low"},{"id":228,"name":"Brydon Carse","nation":"England","team":"Sunrisers Hyderabad","famous":"medium"},{"id":229,"name":"Eshan Malinga","nation":"India","team":"Sunrisers Hyderabad","famous":"low"},{"id":230,"name":"Harsh Dubey","nation":"India","team":"Sunrisers Hyderabad","famous":"medium"},{"id":231,"name":"Harshal Patel","nation":"India","team":"Sunrisers Hyderabad","famous":"medium"},{"id":232,"name":"Heinrich Klaasen","nation":"South Africa","team":"Sunrisers Hyderabad","famous":"high"},{"id":233,"name":"Ishan Kishan","nation":"India","team":"Sunrisers Hyderabad","famous":"medium"},{"id":234,"name":"Jaydev Unadkat","nation":"India","team":"Sunrisers Hyderabad","famous":"medium"},{"id":235,"name":"Kamindu Mendis","nation":"Sri Lanka","team":"Sunrisers Hyderabad","famous":"medium"},{"id":236,"name":"Nitish Kumar Reddy","nation":"India","team":"Sunrisers Hyderabad","famous":"medium"},{"id":237,"name":"Pat Cummins","nation":"Australia","team":"Sunrisers Hyderabad","famous":"high"},{"id":238,"name":"R Smaran","nation":"India","team":"Sunrisers Hyderabad","famous":"low"},{"id":239,"name":"Travis Head","nation":"Australia","team":"Sunrisers Hyderabad","famous":"high"},{"id":240,"name":"Zeeshan Ansari","nation":"India","team":"Sunrisers Hyderabad","famous":"low"},{"id":241,"name":"Liam Livingstone","nation":"England","team":"Sunrisers Hyderabad","famous":"high"},{"id":242,"name":"Jack Edwards","nation":"England","team":"Sunrisers Hyderabad","famous":"low"},{"id":243,"name":"Salil Arora","nation":"India","team":"Sunrisers Hyderabad","famous":"low"},{"id":244,"name":"Shivam Mavi","nation":"India","team":"Sunrisers Hyderabad","famous":"medium"},{"id":245,"name":"Shivang Kumar","nation":"India","team":"Sunrisers Hyderabad","famous":"low"},{"id":246,"name":"Praful Hinge","nation":"India","team":"Sunrisers Hyderabad","famous":"low"},{"id":247,"name":"Amit Kumar","nation":"India","team":"Sunrisers Hyderabad","famous":"low"},{"id":248,"name":"Onkar Tarmale","nation":"India","team":"Sunrisers Hyderabad","famous":"low"},{"id":249,"name":"Sakib Hussain","nation":"India","team":"Sunrisers Hyderabad","famous":"low"},{"id":250,"name":"Karains Fuletra","nation":"India","team":"Sunrisers Hyderabad","famous":"low"}]</script>
-
-<script type="application/json" id="overall-raw">[{"id":1,"name":"MS Dhoni","nation":"India","trophies":["ICC T20 World Cup","ICC ODI World Cup","IPL"],"iplTeams":["Chennai Super Kings","Rising Pune Supergiant"],"famous":"high"},{"id":2,"name":"Virat Kohli","nation":"India","trophies":["ICC T20 World Cup","IPL"],"iplTeams":["Royal Challengers Bengaluru"],"famous":"high"},{"id":3,"name":"Rohit Sharma","nation":"India","trophies":["ICC T20 World Cup","ICC ODI World Cup","IPL"],"iplTeams":["Deccan Chargers","Mumbai Indians"],"famous":"high"},{"id":4,"name":"Ravindra Jadeja","nation":"India","trophies":["ICC T20 World Cup","ICC ODI World Cup","IPL"],"iplTeams":["Rajasthan Royals","Kochi Tuskers Kerala","Chennai Super Kings","Gujarat Lions"],"famous":"high"},{"id":6,"name":"Jasprit Bumrah","nation":"India","trophies":["ICC T20 World Cup","IPL"],"iplTeams":["Mumbai Indians"],"famous":"high"},{"id":7,"name":"Hardik Pandya","nation":"India","trophies":["ICC T20 World Cup","IPL"],"iplTeams":["Mumbai Indians","Gujarat Titans"],"famous":"high"},{"id":8,"name":"Suryakumar Yadav","nation":"India","trophies":["ICC T20 World Cup"],"iplTeams":["Kolkata Knight Riders","Mumbai Indians"],"famous":"high"},{"id":9,"name":"KL Rahul","nation":"India","trophies":["ICC T20 World Cup"],"iplTeams":["Royal Challengers Bengaluru","Sunrisers Hyderabad","Punjab Kings","Lucknow Super Giants","Delhi Capitals"],"famous":"high"},{"id":10,"name":"Shikhar Dhawan","nation":"India","trophies":["ICC ODI World Cup"],"iplTeams":["Delhi Daredevils","Mumbai Indians","Sunrisers Hyderabad","Punjab Kings","Delhi Capitals"],"famous":"high"},{"id":11,"name":"Yuvraj Singh","nation":"India","trophies":["ICC T20 World Cup","ICC ODI World Cup"],"iplTeams":["Mumbai Indians","Punjab Kings","Royal Challengers Bengaluru","Sunrisers Hyderabad","Delhi Daredevils"],"famous":"high"},{"id":12,"name":"Gautam Gambhir","nation":"India","trophies":["ICC T20 World Cup","ICC ODI World Cup"],"iplTeams":["Delhi Daredevils","Kolkata Knight Riders"],"famous":"high"},{"id":13,"name":"Harbhajan Singh","nation":"India","trophies":["ICC T20 World Cup","ICC ODI World Cup"],"iplTeams":["Mumbai Indians","Chennai Super Kings","Kolkata Knight Riders"],"famous":"high"},{"id":14,"name":"Zaheer Khan","nation":"India","trophies":["ICC ODI World Cup"],"iplTeams":["Royal Challengers Bengaluru","Delhi Daredevils","Mumbai Indians"],"famous":"high"},{"id":15,"name":"Suresh Raina","nation":"India","trophies":["ICC T20 World Cup","ICC ODI World Cup","IPL"],"iplTeams":["Chennai Super Kings","Gujarat Lions"],"famous":"high"},{"id":16,"name":"Ishant Sharma","nation":"India","trophies":["ICC ODI World Cup"],"iplTeams":["Kolkata Knight Riders","Deccan Chargers","Punjab Kings","Delhi Daredevils","Rising Pune Supergiant","Gujarat Titans"],"famous":"high"},{"id":17,"name":"Dinesh Karthik","nation":"India","trophies":[],"iplTeams":["Delhi Daredevils","Royal Challengers Bengaluru","Punjab Kings","Mumbai Indians","Kolkata Knight Riders"],"famous":"medium"},{"id":18,"name":"Ambati Rayudu","nation":"India","trophies":["IPL"],"iplTeams":["Deccan Chargers","Mumbai Indians","Chennai Super Kings","Royal Challengers Bengaluru"],"famous":"medium"},{"id":20,"name":"Manish Pandey","nation":"India","trophies":[],"iplTeams":["Royal Challengers Bengaluru","Kolkata Knight Riders","Sunrisers Hyderabad","Punjab Kings","Lucknow Super Giants"],"famous":"medium"},{"id":21,"name":"Ajinkya Rahane","nation":"India","trophies":[],"iplTeams":["Rajasthan Royals","Rising Pune Supergiant","Delhi Daredevils","Mumbai Indians","Kolkata Knight Riders"],"famous":"medium"},{"id":26,"name":"Robin Uthappa","nation":"India","trophies":["ICC T20 World Cup"],"iplTeams":["Royal Challengers Bengaluru","Mumbai Indians","Kolkata Knight Riders","Rajasthan Royals","Chennai Super Kings"],"famous":"medium"},{"id":27,"name":"Irfan Pathan","nation":"India","trophies":["ICC T20 World Cup"],"iplTeams":["Punjab Kings","Deccan Chargers","Delhi Daredevils","Rising Pune Supergiant","Gujarat Lions"],"famous":"medium"},{"id":28,"name":"Yusuf Pathan","nation":"India","trophies":["ICC T20 World Cup","ICC ODI World Cup"],"iplTeams":["Rajasthan Royals","Kolkata Knight Riders","Sunrisers Hyderabad","Mumbai Indians"],"famous":"medium"},{"id":29,"name":"Ravichandran Ashwin","nation":"India","trophies":["ICC T20 World Cup","ICC ODI World Cup","IPL"],"iplTeams":["Chennai Super Kings","Rising Pune Supergiant","Punjab Kings","Delhi Capitals","Rajasthan Royals"],"famous":"high"},{"id":31,"name":"Piyush Chawla","nation":"India","trophies":["ICC ODI World Cup"],"iplTeams":["Punjab Kings","Kolkata Knight Riders","Chennai Super Kings","Mumbai Indians"],"famous":"medium"},{"id":32,"name":"Umesh Yadav","nation":"India","trophies":[],"iplTeams":["Delhi Daredevils","Royal Challengers Bengaluru","Kolkata Knight Riders","Gujarat Titans","Delhi Capitals"],"famous":"medium"},{"id":41,"name":"Bhuvneshwar Kumar","nation":"India","trophies":["ICC T20 World Cup"],"iplTeams":["Royal Challengers Bengaluru","Sunrisers Hyderabad","Punjab Kings"],"famous":"medium"},{"id":42,"name":"Shubman Gill","nation":"India","trophies":[],"iplTeams":["Kolkata Knight Riders","Gujarat Titans"],"famous":"high"},{"id":43,"name":"Yashasvi Jaiswal","nation":"India","trophies":[],"iplTeams":["Rajasthan Royals"],"famous":"high"},{"id":44,"name":"Ruturaj Gaikwad","nation":"India","trophies":["IPL"],"iplTeams":["Chennai Super Kings"],"famous":"medium"},{"id":45,"name":"Devdutt Padikkal","nation":"India","trophies":[],"iplTeams":["Royal Challengers Bengaluru","Rajasthan Royals","Delhi Capitals"],"famous":"medium"},{"id":46,"name":"Ishan Kishan","nation":"India","trophies":["ICC ODI World Cup"],"iplTeams":["Gujarat Lions","Mumbai Indians","Sunrisers Hyderabad"],"famous":"medium"},{"id":47,"name":"Rishabh Pant","nation":"India","trophies":[],"iplTeams":["Delhi Daredevils","Delhi Capitals","Lucknow Super Giants"],"famous":"high"},{"id":48,"name":"Sanju Samson","nation":"India","trophies":[],"iplTeams":["Rajasthan Royals","Chennai Super Kings"],"famous":"medium"},{"id":49,"name":"Shreyas Iyer","nation":"India","trophies":["IPL"],"iplTeams":["Delhi Daredevils","Delhi Capitals","Kolkata Knight Riders","Punjab Kings"],"famous":"medium"},{"id":50,"name":"Prithvi Shaw","nation":"India","trophies":[],"iplTeams":["Delhi Capitals"],"famous":"medium"},{"id":51,"name":"Krunal Pandya","nation":"India","trophies":["IPL"],"iplTeams":["Mumbai Indians","Lucknow Super Giants","Royal Challengers Bengaluru"],"famous":"medium"},{"id":52,"name":"Axar Patel","nation":"India","trophies":["ICC T20 World Cup"],"iplTeams":["Punjab Kings","Gujarat Lions","Delhi Capitals"],"famous":"medium"},{"id":53,"name":"Washington Sundar","nation":"India","trophies":["ICC T20 World Cup"],"iplTeams":["Rising Pune Supergiant","Royal Challengers Bengaluru","Sunrisers Hyderabad","Gujarat Titans"],"famous":"medium"},{"id":54,"name":"Yuzvendra Chahal","nation":"India","trophies":["ICC T20 World Cup"],"iplTeams":["Mumbai Indians","Royal Challengers Bengaluru","Rajasthan Royals","Punjab Kings"],"famous":"medium"},{"id":55,"name":"Kuldeep Yadav","nation":"India","trophies":["ICC T20 World Cup"],"iplTeams":["Mumbai Indians","Kolkata Knight Riders","Delhi Capitals"],"famous":"medium"},{"id":56,"name":"Mohammed Shami","nation":"India","trophies":[],"iplTeams":["Kolkata Knight Riders","Delhi Daredevils","Punjab Kings","Royal Challengers Bengaluru","Gujarat Titans","Sunrisers Hyderabad","Lucknow Super Giants"],"famous":"medium"},{"id":57,"name":"Mohammed Siraj","nation":"India","trophies":["ICC T20 World Cup"],"iplTeams":["Sunrisers Hyderabad","Royal Challengers Bengaluru","Gujarat Titans"],"famous":"medium"},{"id":58,"name":"Shardul Thakur","nation":"India","trophies":[],"iplTeams":["Mumbai Indians","Rising Pune Supergiant","Chennai Super Kings","Delhi Capitals","Kolkata Knight Riders","Lucknow Super Giants"],"famous":"medium"},{"id":59,"name":"Deepak Chahar","nation":"India","trophies":[],"iplTeams":["Rajasthan Royals","Rising Pune Supergiant","Chennai Super Kings","Mumbai Indians"],"famous":"medium"},{"id":60,"name":"Tilak Varma","nation":"India","trophies":[],"iplTeams":["Mumbai Indians"],"famous":"medium"},{"id":61,"name":"Rinku Singh","nation":"India","trophies":[],"iplTeams":["Kolkata Knight Riders"],"famous":"medium"},{"id":62,"name":"Riyan Parag","nation":"India","trophies":[],"iplTeams":["Rajasthan Royals"],"famous":"medium"},{"id":63,"name":"Dhruv Jurel","nation":"India","trophies":[],"iplTeams":["Rajasthan Royals"],"famous":"medium"},{"id":64,"name":"Nitish Kumar Reddy","nation":"India","trophies":[],"iplTeams":["Sunrisers Hyderabad"],"famous":"medium"},{"id":65,"name":"Abhishek Sharma","nation":"India","trophies":["ICC T20 World Cup"],"iplTeams":["Punjab Kings","Sunrisers Hyderabad"],"famous":"medium"},{"id":66,"name":"Harshit Rana","nation":"India","trophies":["IPL"],"iplTeams":["Kolkata Knight Riders"],"famous":"medium"},{"id":67,"name":"Akash Deep","nation":"India","trophies":[],"iplTeams":["Royal Challengers Bengaluru","Kolkata Knight Riders"],"famous":"medium"},{"id":68,"name":"Mayank Yadav","nation":"India","trophies":[],"iplTeams":["Lucknow Super Giants"],"famous":"medium"},{"id":69,"name":"Vaibhav Suryavanshi","nation":"India","trophies":[],"iplTeams":["Rajasthan Royals"],"famous":"medium"},{"id":71,"name":"Ayush Mhatre","nation":"India","trophies":[],"iplTeams":["Chennai Super Kings"],"famous":"medium"},{"id":72,"name":"Ramandeep Singh","nation":"India","trophies":["IPL"],"iplTeams":["Kolkata Knight Riders"],"famous":"medium"},{"id":75,"name":"Varun Chakravarthy","nation":"India","trophies":[],"iplTeams":["Punjab Kings","Kolkata Knight Riders"],"famous":"medium"},{"id":76,"name":"Umran Malik","nation":"India","trophies":[],"iplTeams":["Sunrisers Hyderabad","Kolkata Knight Riders"],"famous":"medium"},{"id":77,"name":"Anshul Kamboj","nation":"India","trophies":[],"iplTeams":["Chennai Super Kings"],"famous":"medium"},{"id":78,"name":"Prasidh Krishna","nation":"India","trophies":[],"iplTeams":["Kolkata Knight Riders","Rajasthan Royals","Gujarat Titans"],"famous":"medium"},{"id":79,"name":"Avesh Khan","nation":"India","trophies":[],"iplTeams":["Delhi Capitals","Lucknow Super Giants"],"famous":"medium"},{"id":80,"name":"Khaleel Ahmed","nation":"India","trophies":[],"iplTeams":["Sunrisers Hyderabad","Delhi Capitals","Rajasthan Royals","Chennai Super Kings"],"famous":"medium"},{"id":81,"name":"Harshal Patel","nation":"India","trophies":[],"iplTeams":["Delhi Capitals","Royal Challengers Bengaluru","Punjab Kings","Sunrisers Hyderabad"],"famous":"medium"},{"id":85,"name":"Arshdeep Singh","nation":"India","trophies":["ICC T20 World Cup"],"iplTeams":["Punjab Kings"],"famous":"medium"},{"id":88,"name":"Ravi Bishnoi","nation":"India","trophies":["ICC T20 World Cup"],"iplTeams":["Punjab Kings","Lucknow Super Giants","Rajasthan Royals"],"famous":"medium"},{"id":89,"name":"Rahul Chahar","nation":"India","trophies":[],"iplTeams":["Rajasthan Royals","Mumbai Indians","Punjab Kings","Chennai Super Kings"],"famous":"medium"},{"id":90,"name":"Jaydev Unadkat","nation":"India","trophies":[],"iplTeams":["Kolkata Knight Riders","Royal Challengers Bengaluru","Rising Pune Supergiant","Rajasthan Royals","Mumbai Indians","Sunrisers Hyderabad"],"famous":"medium"},{"id":91,"name":"Sandeep Sharma","nation":"India","trophies":[],"iplTeams":["Punjab Kings","Rajasthan Royals","Sunrisers Hyderabad"],"famous":"medium"},{"id":95,"name":"Sai Sudharsan","nation":"India","trophies":[],"iplTeams":["Gujarat Titans"],"famous":"medium"},{"id":96,"name":"Sarfaraz Khan","nation":"India","trophies":[],"iplTeams":["Royal Challengers Bengaluru","Punjab Kings","Kolkata Knight Riders","Delhi Capitals","Chennai Super Kings"],"famous":"medium"},{"id":101,"name":"Shivam Dube","nation":"India","trophies":["ICC T20 World Cup"],"iplTeams":["Royal Challengers Bengaluru","Rajasthan Royals","Chennai Super Kings"],"famous":"medium"},{"id":102,"name":"Musheer Khan","nation":"India","trophies":[],"iplTeams":["Mumbai Indians","Punjab Kings"],"famous":"medium"},{"id":103,"name":"Karun Nair","nation":"India","trophies":[],"iplTeams":["Rajasthan Royals","Punjab Kings","Delhi Capitals","Kolkata Knight Riders"],"famous":"medium"},{"id":104,"name":"Nitish Rana","nation":"India","trophies":["IPL"],"iplTeams":["Mumbai Indians","Kolkata Knight Riders","Rajasthan Royals","Delhi Capitals"],"famous":"medium"},{"id":115,"name":"Rajat Patidar","nation":"India","trophies":["IPL"],"iplTeams":["Royal Challengers Bengaluru"],"famous":"medium"},{"id":127,"name":"Rahul Tewatia","nation":"India","trophies":[],"iplTeams":["Rajasthan Royals","Punjab Kings","Delhi Capitals","Gujarat Titans"],"famous":"medium"},{"id":131,"name":"Venkatesh Iyer","nation":"India","trophies":["IPL"],"iplTeams":["Kolkata Knight Riders","Royal Challengers Bengaluru"],"famous":"medium"},{"id":207,"name":"David Warner","nation":"Australia","trophies":["ICC T20 World Cup","IPL"],"iplTeams":["Delhi Daredevils","Sunrisers Hyderabad","Delhi Capitals"],"famous":"high"},{"id":208,"name":"Glenn Maxwell","nation":"Australia","trophies":["ICC ODI World Cup","ICC T20 World Cup"],"iplTeams":["Delhi Daredevils","Mumbai Indians","Punjab Kings","Royal Challengers Bengaluru"],"famous":"high"},{"id":209,"name":"Mitchell Starc","nation":"Australia","trophies":["ICC ODI World Cup","ICC T20 World Cup"],"iplTeams":["Royal Challengers Bengaluru","Kolkata Knight Riders","Delhi Capitals"],"famous":"high"},{"id":210,"name":"Pat Cummins","nation":"Australia","trophies":["ICC ODI World Cup","ICC T20 World Cup","WTC"],"iplTeams":["Kolkata Knight Riders","Sunrisers Hyderabad"],"famous":"high"},{"id":211,"name":"Josh Hazlewood","nation":"Australia","trophies":["ICC ODI World Cup","ICC T20 World Cup","WTC"],"iplTeams":["Rising Pune Supergiant","Chennai Super Kings","Royal Challengers Bengaluru"],"famous":"medium"},{"id":212,"name":"Travis Head","nation":"Australia","trophies":["ICC ODI World Cup","ICC T20 World Cup","WTC"],"iplTeams":["Sunrisers Hyderabad"],"famous":"high"},{"id":213,"name":"Steve Smith","nation":"Australia","trophies":["ICC ODI World Cup","WTC"],"iplTeams":["Kolkata Knight Riders","Rajasthan Royals","Rising Pune Supergiant","Delhi Capitals"],"famous":"high"},{"id":214,"name":"Marcus Stoinis","nation":"Australia","trophies":["ICC T20 World Cup"],"iplTeams":["Royal Challengers Bengaluru","Delhi Capitals","Lucknow Super Giants","Punjab Kings"],"famous":"medium"},{"id":215,"name":"David Miller","nation":"South Africa","trophies":[],"iplTeams":["Punjab Kings","Rajasthan Royals","Gujarat Titans","Delhi Capitals"],"famous":"high"},{"id":216,"name":"AB de Villiers","nation":"South Africa","trophies":[],"iplTeams":["Delhi Daredevils","Royal Challengers Bengaluru"],"famous":"high"},{"id":217,"name":"Faf du Plessis","nation":"South Africa","trophies":[],"iplTeams":["Chennai Super Kings","Rising Pune Supergiant","Delhi Capitals","Royal Challengers Bengaluru"],"famous":"high"},{"id":218,"name":"Kagiso Rabada","nation":"South Africa","trophies":[],"iplTeams":["Delhi Capitals","Punjab Kings","Gujarat Titans"],"famous":"high"},{"id":219,"name":"Lungi Ngidi","nation":"South Africa","trophies":[],"iplTeams":["Chennai Super Kings","Delhi Capitals"],"famous":"medium"},{"id":220,"name":"Anrich Nortje","nation":"South Africa","trophies":[],"iplTeams":["Kolkata Knight Riders","Delhi Capitals","Lucknow Super Giants"],"famous":"medium"},{"id":221,"name":"Aiden Markram","nation":"South Africa","trophies":["WTC"],"iplTeams":["Punjab Kings","Sunrisers Hyderabad","Lucknow Super Giants"],"famous":"high"},{"id":222,"name":"Marco Jansen","nation":"South Africa","trophies":[],"iplTeams":["Sunrisers Hyderabad","Mumbai Indians","Punjab Kings"],"famous":"high"},{"id":223,"name":"Tristan Stubbs","nation":"South Africa","trophies":[],"iplTeams":["Mumbai Indians","Delhi Capitals"],"famous":"medium"},{"id":224,"name":"Matthew Breetzke","nation":"South Africa","trophies":[],"iplTeams":["Lucknow Super Giants"],"famous":"medium"},{"id":230,"name":"Ryan Rickelton","nation":"South Africa","trophies":["WTC"],"iplTeams":["Mumbai Indians"],"famous":"medium"},{"id":231,"name":"Chris Gayle","nation":"West Indies","trophies":["ICC T20 World Cup"],"iplTeams":["Kolkata Knight Riders","Royal Challengers Bengaluru","Punjab Kings"],"famous":"high"},{"id":233,"name":"Andre Russell","nation":"West Indies","trophies":["ICC T20 World Cup"],"iplTeams":["Delhi Daredevils","Kolkata Knight Riders"],"famous":"high"},{"id":234,"name":"Sunil Narine","nation":"West Indies","trophies":[],"iplTeams":["Kolkata Knight Riders"],"famous":"high"},{"id":235,"name":"Kieron Pollard","nation":"West Indies","trophies":["ICC T20 World Cup"],"iplTeams":["Mumbai Indians"],"famous":"high"},{"id":238,"name":"Rovman Powell","nation":"West Indies","trophies":[],"iplTeams":["Delhi Capitals","Rajasthan Royals","Kolkata Knight Riders"],"famous":"medium"},{"id":239,"name":"Nicholas Pooran","nation":"West Indies","trophies":[],"iplTeams":["Punjab Kings","Sunrisers Hyderabad","Lucknow Super Giants"],"famous":"high"},{"id":240,"name":"Shimron Hetmyer","nation":"West Indies","trophies":[],"iplTeams":["Delhi Capitals","Royal Challengers Bengaluru","Rajasthan Royals"],"famous":"medium"},{"id":241,"name":"Sherfane Rutherford","nation":"West Indies","trophies":[],"iplTeams":["Gujarat Titans","Mumbai Indians"],"famous":"medium"},{"id":242,"name":"Romario Shepherd","nation":"West Indies","trophies":[],"iplTeams":["Sunrisers Hyderabad","Mumbai Indians","Lucknow Super Giants","Royal Challengers Bengaluru"],"famous":"medium"},{"id":249,"name":"Jason Holder","nation":"West Indies","trophies":[],"iplTeams":["Sunrisers Hyderabad","Kolkata Knight Riders","Lucknow Super Giants","Gujarat Titans"],"famous":"medium"},{"id":277,"name":"Wanindu Hasaranga","nation":"Sri Lanka","trophies":[],"iplTeams":["Royal Challengers Bengaluru","Sunrisers Hyderabad","Lucknow Super Giants"],"famous":"medium"},{"id":278,"name":"Pathum Nissanka","nation":"Sri Lanka","trophies":[],"iplTeams":["Delhi Capitals"],"famous":"medium"},{"id":279,"name":"Kamindu Mendis","nation":"Sri Lanka","trophies":[],"iplTeams":["Sunrisers Hyderabad"],"famous":"medium"},{"id":280,"name":"Matheesha Pathirana","nation":"Sri Lanka","trophies":["IPL"],"iplTeams":["Chennai Super Kings","Kolkata Knight Riders"],"famous":"medium"},{"id":282,"name":"Noor Ahmad","nation":"Afghanistan","trophies":[],"iplTeams":["Gujarat Titans","Chennai Super Kings"],"famous":"medium"},{"id":283,"name":"Rashid Khan","nation":"Afghanistan","trophies":[],"iplTeams":["Sunrisers Hyderabad","Delhi Capitals","Gujarat Titans"],"famous":"high"},{"id":284,"name":"Mohammad Nabi","nation":"Afghanistan","trophies":[],"iplTeams":["Sunrisers Hyderabad","Kolkata Knight Riders"],"famous":"medium"},{"id":285,"name":"Mujeeb Ur Rahman","nation":"Afghanistan","trophies":[],"iplTeams":["Punjab Kings","Rajasthan Royals","Mumbai Indians"],"famous":"medium"},{"id":301,"name":"Quinton de Kock","nation":"South Africa","trophies":[],"iplTeams":["Delhi Daredevils","Royal Challengers Bengaluru","Mumbai Indians","Lucknow Super Giants"],"famous":"high"},{"id":323,"name":"Jos Buttler","nation":"England","trophies":["ICC T20 World Cup","ICC ODI World Cup"],"iplTeams":["Mumbai Indians","Rajasthan Royals","Gujarat Titans"],"famous":"high"},{"id":324,"name":"Sam Curran","nation":"England","trophies":["ICC T20 World Cup"],"iplTeams":["Chennai Super Kings","Punjab Kings","Rajasthan Royals"],"famous":"high"},{"id":325,"name":"Liam Livingstone","nation":"England","trophies":["ICC T20 World Cup"],"iplTeams":["Rajasthan Royals","Punjab Kings","Sunrisers Hyderabad"],"famous":"high"},{"id":331,"name":"Phil Salt","nation":"England","trophies":["ICC T20 World Cup"],"iplTeams":["Delhi Capitals","Kolkata Knight Riders","Royal Challengers Bengaluru"],"famous":"medium"},{"id":332,"name":"Will Jacks","nation":"England","trophies":[],"iplTeams":["Royal Challengers Bengaluru","Mumbai Indians"],"famous":"medium"},{"id":333,"name":"Brydon Carse","nation":"England","trophies":[],"iplTeams":["Sunrisers Hyderabad"],"famous":"medium"},{"id":334,"name":"Jacob Bethell","nation":"England","trophies":[],"iplTeams":["Royal Challengers Bengaluru"],"famous":"medium"},{"id":336,"name":"Jofra Archer","nation":"England","trophies":["ICC ODI World Cup"],"iplTeams":["Rajasthan Royals","Mumbai Indians"],"famous":"high"},{"id":337,"name":"Ben Duckett","nation":"England","trophies":[],"iplTeams":["Delhi Capitals"],"famous":"medium"},{"id":346,"name":"Trent Boult","nation":"New Zealand","trophies":[],"iplTeams":["Mumbai Indians","Rajasthan Royals","Delhi Capitals"],"famous":"high"},{"id":347,"name":"Kane Williamson","nation":"New Zealand","trophies":["WTC"],"iplTeams":["Sunrisers Hyderabad","Gujarat Titans"],"famous":"low"},{"id":351,"name":"Mitchell Santner","nation":"New Zealand","trophies":[],"iplTeams":["Chennai Super Kings","Mumbai Indians"],"famous":"medium"},{"id":352,"name":"Kyle Jamieson","nation":"New Zealand","trophies":["WTC"],"iplTeams":["Royal Challengers Bengaluru","Punjab Kings","Delhi Capitals"],"famous":"medium"},{"id":353,"name":"Glenn Phillips","nation":"New Zealand","trophies":[],"iplTeams":["Rajasthan Royals","Gujarat Titans"],"famous":"medium"},{"id":355,"name":"Rachin Ravindra","nation":"New Zealand","trophies":[],"iplTeams":["Kolkata Knight Riders"],"famous":"medium"},{"id":357,"name":"Finn Allen","nation":"New Zealand","trophies":[],"iplTeams":["Royal Challengers Bengaluru","Kolkata Knight Riders"],"famous":"medium"},{"id":358,"name":"Matt Henry","nation":"New Zealand","trophies":[],"iplTeams":["Kolkata Knight Riders","Rajasthan Royals","Chennai Super Kings"],"famous":"medium"},{"id":360,"name":"Tim Seifert","nation":"New Zealand","trophies":[],"iplTeams":["Kolkata Knight Riders"],"famous":"medium"},{"id":361,"name":"Tim David","nation":"Singapore","trophies":[],"iplTeams":["Mumbai Indians","Royal Challengers Bengaluru"],"famous":"high"},{"id":364,"name":"Mustafizur Rahman","nation":"Bangladesh","trophies":[],"iplTeams":["Sunrisers Hyderabad","Mumbai Indians","Delhi Capitals","Rajasthan Royals","Lucknow Super Giants","Chennai Super Kings","Kolkata Knight Riders"],"famous":"medium"},{"id":376,"name":"Mitchell Marsh","nation":"Australia","trophies":["ICC T20 World Cup","WTC"],"iplTeams":["Sunrisers Hyderabad","Delhi Capitals","Lucknow Super Giants"],"famous":"high"},{"id":382,"name":"Cameron Green","nation":"Australia","trophies":["WTC","ICC ODI World Cup"],"iplTeams":["Mumbai Indians","Royal Challengers Bengaluru","Kolkata Knight Riders"],"famous":"medium"},{"id":385,"name":"Xavier Bartlett","nation":"Australia","trophies":[],"iplTeams":["Punjab Kings"],"famous":"medium"},{"id":386,"name":"Mitch Owen","nation":"Australia","trophies":[],"iplTeams":["Punjab Kings"],"famous":"medium"},{"id":387,"name":"Ben Dwarshuis","nation":"Australia","trophies":[],"iplTeams":["Punjab Kings"],"famous":"medium"},{"id":388,"name":"Cooper Connolly","nation":"Australia","trophies":[],"iplTeams":["Punjab Kings"],"famous":"medium"},{"id":389,"name":"Tom Banton","nation":"England","trophies":[],"iplTeams":["Kolkata Knight Riders","Punjab Kings","Gujarat Titans"],"famous":"medium"},{"id":448,"name":"Heinrich Klaasen","nation":"South Africa","trophies":[],"iplTeams":["Sunrisers Hyderabad"],"famous":"high"},{"id":452,"name":"Josh Inglis","nation":"Australia","trophies":["ICC T20 World Cup","ICC ODI World Cup"],"iplTeams":["Lucknow Super Giants"],"famous":"medium"},{"id":500,"name":"Wriddhiman Saha","nation":"India","trophies":["ICC ODI World Cup","IPL"],"iplTeams":["Chennai Super Kings","Punjab Kings","Sunrisers Hyderabad","Gujarat Titans"],"famous":"medium"}]</script>
-
 <!-- ═══ MAIN GAME SCRIPT ═══ -->
 <script>
 'use strict';
 
+// ── Player data — loaded from external JSON files ──────────────────────────
+let IPL26_DATA   = null;
+let OVERALL_DATA = null;
+
+async function loadData() {
+  try {
+    const [r1, r2] = await Promise.all([
+      fetch('ipl26.json'),
+      fetch('overall.json')
+    ]);
+    if (!r1.ok || !r2.ok) throw new Error('Fetch failed');
+    [IPL26_DATA, OVERALL_DATA] = await Promise.all([r1.json(), r2.json()]);
+  } catch (e) {
+    document.getElementById('loading-screen').innerHTML =
+      '<p style="color:var(--red);font-size:.9rem">⚠ Failed to load player data.<br>Make sure ipl26.json &amp; overall.json are in the same folder.</p>';
+    throw e;
+  }
+}
+
+// ── Constants ───────────────────────────────────────────────────────────────
 const TEAM_LOGOS = {
   "Chennai Super Kings":"csk.png","Delhi Capitals":"dc.png","Delhi Daredevils":"dd.png",
   "Deccan Chargers":"deccan.png","Gujarat Titans":"gt.png","Kolkata Knight Riders":"kkr.png",
@@ -609,9 +634,7 @@ const NATION_SET = new Set([
   'West Indies','Singapore'
 ]);
 
-const IPL26_DATA   = JSON.parse(document.getElementById('ipl26-raw').textContent);
-const OVERALL_DATA = JSON.parse(document.getElementById('overall-raw').textContent);
-
+// ── RNG ─────────────────────────────────────────────────────────────────────
 function mulberry32(seed) {
   return function() {
     seed |= 0; seed = seed + 0x6D2B79F5 | 0;
@@ -636,6 +659,7 @@ function hashStr(s) {
   return Math.abs(h) % 9999999;
 }
 
+// ── Game logic ───────────────────────────────────────────────────────────────
 function playerMatchesCell(player, cell, ds) {
   const ct = cell.type, cv = cell.value;
   const teams   = ds === 'overall' ? (player.iplTeams || []) : [player.team || ''];
@@ -762,6 +786,7 @@ function createGameState(ds, gridSize, difficulty, seed = null) {
   return { ds, gridSize, difficulty, players, grid, solutions };
 }
 
+// ── Game state ───────────────────────────────────────────────────────────────
 const G = {
   ds:'overall', gs:3, diff:'normal', mode:'solo',
   players:[], grid:[], solutions:{},
@@ -909,16 +934,11 @@ function quitGame() {
   end('quit');
 }
 
-// ── Render Grid — DOM-based, no inline onerror string escaping issues ──────
+// ── Grid rendering ───────────────────────────────────────────────────────────
 function makeImg(src, alt, w, h, radius) {
   var img = document.createElement('img');
-  img.src = src;
-  img.alt = alt;
-  img.style.width = w;
-  img.style.height = h;
-  img.style.objectFit = 'contain';
-  img.style.borderRadius = radius || '10px';
-  img.style.flexShrink = '0';
+  img.src = src; img.alt = alt;
+  img.style.cssText = 'width:'+w+';height:'+h+';object-fit:contain;border-radius:'+(radius||'10px')+';flex-shrink:0';
   return img;
 }
 
@@ -945,22 +965,18 @@ function renderGrid() {
         fallback.style.cssText = 'display:none;font-size:.85rem;font-weight:700;color:var(--txt);text-align:center';
         fallback.textContent = cell.value;
         img.onerror = function() { this.style.display = 'none'; fallback.style.display = 'flex'; };
-        div.appendChild(img);
-        div.appendChild(fallback);
+        div.appendChild(img); div.appendChild(fallback);
       } else {
         var icon = document.createElement('span');
-        icon.style.fontSize = '2rem';
-        icon.textContent = '🏏';
+        icon.style.fontSize = '2rem'; icon.textContent = '🏏';
         var lbl = document.createElement('span');
         lbl.className = 'cell-label';
         lbl.style.cssText = 'font-size:.85rem;font-weight:700;color:var(--txt)';
         lbl.textContent = cell.value;
-        div.appendChild(icon);
-        div.appendChild(lbl);
+        div.appendChild(icon); div.appendChild(lbl);
       }
 
     } else if (cell.type === 'nation') {
-      // Show only the flag image — no text fallback to avoid leaking names
       var code = cell.value.slice(0, 3);
       var img = makeImg(code + '.png', cell.value, '110px', '110px', '10px');
       img.onerror = function() { this.style.display = 'none'; };
@@ -968,14 +984,12 @@ function renderGrid() {
 
     } else if (cell.type === 'trophy') {
       var icon = document.createElement('span');
-      icon.style.fontSize = '2rem';
-      icon.textContent = '🏆';
+      icon.style.fontSize = '2rem'; icon.textContent = '🏆';
       var lbl = document.createElement('span');
       lbl.className = 'cell-label';
       lbl.style.cssText = 'font-size:.68rem;color:var(--acc);font-weight:600';
       lbl.textContent = cell.value;
-      div.appendChild(icon);
-      div.appendChild(lbl);
+      div.appendChild(icon); div.appendChild(lbl);
 
     } else if (cell.type === 'combo') {
       var parts = cell.value.split('+').map(function(p) { return p.trim(); });
@@ -998,14 +1012,12 @@ function renderGrid() {
           img.onerror = function() { this.style.display = 'none'; };
           wrap.appendChild(img);
         } else if (isNation) {
-          var natCode = part.slice(0, 3);
-          var img = makeImg(natCode + '.png', part, '52px', '52px', '7px');
+          var img = makeImg(part.slice(0,3) + '.png', part, '52px', '52px', '7px');
           img.onerror = function() { this.style.display = 'none'; };
           wrap.appendChild(img);
         } else if (isTrophy) {
           var s = document.createElement('span');
-          s.style.cssText = 'font-size:1.8rem;flex-shrink:0';
-          s.textContent = '🏆';
+          s.style.cssText = 'font-size:1.8rem;flex-shrink:0'; s.textContent = '🏆';
           wrap.appendChild(s);
         } else {
           var s = document.createElement('span');
@@ -1014,7 +1026,6 @@ function renderGrid() {
           wrap.appendChild(s);
         }
       });
-
       div.appendChild(wrap);
     }
 
@@ -1022,6 +1033,7 @@ function renderGrid() {
   });
 }
 
+// ── Start / end game ─────────────────────────────────────────────────────────
 window.startGame = function(ds, gs, diff, mode, seed) {
   ds   = ds   || selPool;
   gs   = parseInt(gs   || document.getElementById('cfg-gs').value  || 3);
@@ -1063,9 +1075,7 @@ window.startGame = function(ds, gs, diff, mode, seed) {
   setTimeout(showP, 100);
 };
 
-function startGame(ds, gs, diff, mode, seed) {
-  window.startGame(ds, gs, diff, mode, seed);
-}
+function startGame(ds, gs, diff, mode, seed) { window.startGame(ds, gs, diff, mode, seed); }
 
 function startDaily() {
   const today = new Date().toISOString().slice(0, 10);
@@ -1138,6 +1148,7 @@ function renderSolutions() {
   cont.innerHTML = html;
 }
 
+// ── Pool selector ────────────────────────────────────────────────────────────
 let selPool = 'overall';
 function selectPool(src, card) {
   selPool = src;
@@ -1145,6 +1156,7 @@ function selectPool(src, card) {
   if (card) card.classList.add('active');
 }
 
+// ── Fame hint ────────────────────────────────────────────────────────────────
 const diffConfig = {
   easy:   { high: Math.round(25*.75), medium: 25-Math.round(25*.75), low: 0, desc: 'Teams only · 75% stars / 25% known players' },
   normal: { high: Math.round(25*.50), medium: 25-Math.round(25*.50), low: 0, desc: 'Teams &amp; Nations · 50% stars / 50% known players' },
@@ -1161,6 +1173,7 @@ function updateFameHint() {
   document.getElementById('fh-desc').innerHTML = d.desc;
 }
 
+// ── History / leaderboard ────────────────────────────────────────────────────
 function saveHistory(entry) {
   const h = JSON.parse(localStorage.getItem('cb-history') || '[]');
   h.unshift(entry);
@@ -1207,15 +1220,15 @@ function renderLeaderboard() {
 function clearHistory() {
   if (!confirm('Clear all your score history?')) return;
   localStorage.removeItem('cb-history');
-  renderLeaderboard();
-  renderHistory();
+  renderLeaderboard(); renderHistory();
   toast('History cleared', 'info');
 }
 
+// ── Stats ────────────────────────────────────────────────────────────────────
 function getStats() {
   const h = JSON.parse(localStorage.getItem('cb-history') || '[]');
   const total = h.length;
-  if (!total) return { total:0, winPct:0, avgTime:0, avgAcc:0, bestScore:0, totalPts:0, totalCorrect:0, totalWrong:0, easyBest:0, normalBest:0, hardBest:0 };
+  if (!total) return { total:0, winPct:0, avgTime:0, avgAcc:0, bestScore:0, totalPts:0, totalCorrect:0, totalWrong:0, easyBest:null, normalBest:null, hardBest:null };
   const bestScore   = Math.max(...h.map(e => e.score || 0));
   const totalPts    = h.reduce((s, e) => s + (e.score || 0), 0);
   const avgTime     = Math.round(h.reduce((s, e) => s + (e.elapsed || 0), 0) / total);
@@ -1249,9 +1262,7 @@ function showStats() {
   document.getElementById('stats-modal').style.display = 'flex';
 }
 
-function closeStats() {
-  document.getElementById('stats-modal').style.display = 'none';
-}
+function closeStats() { document.getElementById('stats-modal').style.display = 'none'; }
 
 function saveStatsUsername() {
   const val = (document.getElementById('stats-name-input').value || '').trim().slice(0,24);
@@ -1266,12 +1277,11 @@ function saveStatsUsername() {
 function confirmClearFromStats() {
   if (!confirm('Reset all history and stats?')) return;
   localStorage.removeItem('cb-history');
-  renderHistory();
-  renderLeaderboard();
-  closeStats();
+  renderHistory(); renderLeaderboard(); closeStats();
   toast('History cleared', 'info');
 }
 
+// ── User init ────────────────────────────────────────────────────────────────
 function initUser() {
   if (!localStorage.getItem('cb-user-id'))
     localStorage.setItem('cb-user-id', 'user_' + Math.random().toString(36).slice(2,10));
@@ -1282,8 +1292,7 @@ function initUser() {
 function editUsername() {
   document.getElementById('usernameDisplay').style.display = 'none';
   const inp = document.getElementById('usernameInput');
-  inp.style.display = '';
-  inp.value = localStorage.getItem('cb-username') || '';
+  inp.style.display = ''; inp.value = localStorage.getItem('cb-username') || '';
   inp.focus(); inp.select();
 }
 function saveUsername() {
@@ -1298,6 +1307,7 @@ function cancelUsername() {
   document.getElementById('usernameDisplay').style.display = '';
 }
 
+// ── View router ──────────────────────────────────────────────────────────────
 const VIEWS = ['home','game','about','contact','privacy','terms','leaderboard'];
 function showView(name) {
   VIEWS.forEach(v => {
@@ -1309,6 +1319,7 @@ function showView(name) {
   if (name === 'leaderboard') renderLeaderboard();
 }
 
+// ── Toast ────────────────────────────────────────────────────────────────────
 function toast(msg, type) {
   type = type || 'info';
   const d = document.createElement('div');
@@ -1317,6 +1328,8 @@ function toast(msg, type) {
   document.getElementById('toasts').appendChild(d);
   setTimeout(() => { d.style.opacity='0'; d.style.transform='translateX(20px)'; d.style.transition='.25s ease'; setTimeout(() => d.remove(), 280); }, 2800);
 }
+
+// ── Theme / menu ─────────────────────────────────────────────────────────────
 function toggleTheme() {
   const cur  = document.documentElement.getAttribute('data-theme') || 'dark';
   const next = cur === 'dark' ? 'light' : 'dark';
@@ -1329,9 +1342,8 @@ function toggleMenu() {
   const open = m.classList.toggle('open');
   if (b) b.setAttribute('aria-expanded', open);
 }
-function closeMenu() {
-  document.getElementById('mmenu').classList.remove('open');
-}
+function closeMenu() { document.getElementById('mmenu').classList.remove('open'); }
+
 document.addEventListener('click', e => {
   const m = document.getElementById('mmenu');
   if (m && !m.contains(e.target) && !e.target.closest('#navBurger')) m.classList.remove('open');
@@ -1340,6 +1352,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { closeMenu(); cancelUsername(); closeStats(); }
 });
 
+// ── Contact ──────────────────────────────────────────────────────────────────
 function submitContact() {
   const name    = document.getElementById('fname').value.trim();
   const email   = document.getElementById('femail').value.trim();
@@ -1354,12 +1367,16 @@ function submitContact() {
   toast('Opening your email client…', 'success');
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+// ── Bootstrap: load JSON then init ───────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadData();                          // fetch ipl26.json & overall.json
+  document.getElementById('loading-screen').style.display = 'none';
   initUser();
   updateFameHint();
   renderHistory();
   const saved = localStorage.getItem('cb-theme') || 'dark';
   document.getElementById('themeBtn').textContent = saved === 'dark' ? '☀️' : '🌙';
+  showView('home');                          // show the page only after data is ready
 });
 </script>
 </body>
