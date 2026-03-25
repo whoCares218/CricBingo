@@ -111,7 +111,7 @@ select.input option{background:var(--sur);color:var(--txt)}
 @keyframes cell-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
 .cell.wc-filled{background:var(--green);border-color:var(--green);cursor:default;animation:wc-fill .6s ease forwards}
 .cell.wc-filled::after{content:'✦';position:absolute;bottom:6px;right:8px;font-size:.7rem;color:var(--green);font-weight:700;opacity:0;animation:check-appear .4s .2s ease forwards}
-@keyframes wc-fill{0%{background:rgba(155,114,247,.3);box-shadow:0 0 18px rgba(155,114,247,.35)}100%{background:rgba(155,114,247,.1);box-shadow:none}}
+@keyframes wc-fill{0%{background:rgba(155,114,247,.3);box-shadow:0 0 18px var(--green)}100%{background:rgba(155,114,247,.1);box-shadow:none}}
 .player-card{background:var(--sur);border:1px solid var(--bdr2);border-radius:var(--r-xl);padding:22px 26px;text-align:center}
 .player-name{font-family:var(--font-head);font-size:clamp(1.25rem,3.5vw,2rem);font-weight:800;color:var(--acc);letter-spacing:-.5px}
 .player-hint{font-size:.78rem;color:var(--txt3)}
