@@ -106,7 +106,7 @@ select.input option{background:var(--sur);color:var(--txt)}
 @keyframes cell-fill-glow{0%{background:rgba(45,211,111,.25);box-shadow:0 0 20px rgba(45,211,111,.35)}100%{background:rgba(45,211,111,.09);box-shadow:none}}
 @keyframes check-appear{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
 .cell.wildcard-hint{border-color:var(--acc);background:var(--acc-dim);animation:wc-pulse 1.5s ease infinite}
-@keyframes wc-pulse{0%,100%{box-shadow:0 0 0 0 var(--acc-glow)}50%{box-shadow:0 0 0 6px rgba(245,166,35,0)}}
+@keyframes wc-pulse{0%,100%{box-shadow:0 0 0 0 var(--acc-glow)}50%{box-shadow:0 0 0 6px var(--green)}}
 .cell.wrong{animation:cell-shake .4s ease;border-color:var(--red);background:rgba(240,82,79,.08)}
 @keyframes cell-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
 .cell.wc-filled{background:var(--green);border-color:var(--green);cursor:default;animation:wc-fill .6s ease forwards}
