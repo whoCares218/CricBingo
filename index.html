@@ -109,7 +109,7 @@ select.input option{background:var(--sur);color:var(--txt)}
 @keyframes wc-pulse{0%,100%{box-shadow:0 0 0 0 var(--acc-glow)}50%{box-shadow:0 0 0 6px rgba(245,166,35,0)}}
 .cell.wrong{animation:cell-shake .4s ease;border-color:var(--red);background:rgba(240,82,79,.08)}
 @keyframes cell-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
-.cell.wc-filled{background:rgba(155,114,247,.1);border-color:rgba(155,114,247,.45);cursor:default;animation:wc-fill .6s ease forwards}
+.cell.wc-filled{background:var(--green);border-color:var(--green);cursor:default;animation:wc-fill .6s ease forwards}
 .cell.wc-filled::after{content:'✦';position:absolute;bottom:6px;right:8px;font-size:.7rem;color:var(--green);font-weight:700;opacity:0;animation:check-appear .4s .2s ease forwards}
 @keyframes wc-fill{0%{background:rgba(155,114,247,.3);box-shadow:0 0 18px rgba(155,114,247,.35)}100%{background:rgba(155,114,247,.1);box-shadow:none}}
 .player-card{background:var(--sur);border:1px solid var(--bdr2);border-radius:var(--r-xl);padding:22px 26px;text-align:center}
@@ -178,8 +178,8 @@ hr{border:none;border-top:1px solid var(--bdr);margin:22px 0}
 .game-action-btn:disabled{opacity:.35;cursor:not-allowed}
 .btn-skip{background:var(--sur2);color:var(--txt);border-color:var(--bdr3)}
 .btn-skip:hover:not(:disabled){background:var(--sur3);border-color:var(--blue);color:var(--blue)}
-.btn-wc{background:var(--sur2);color:var(--green);border-color:rgba(155,114,247,.35)}
-.btn-wc:hover:not(:disabled){background:rgba(155,114,247,.08);border-color:var(--green);box-shadow:0 6px 20px rgba(155,114,247,.2)}
+.btn-wc{background:var(--sur2);color:var(--pur);border-color:rgba(155,114,247,.35)}
+.btn-wc:hover:not(:disabled){background:rgba(155,114,247,.08);border-color:var(--pur);box-shadow:0 6px 20px rgba(155,114,247,.2)}
 .btn-quit-row{display:flex;justify-content:center;margin-top:10px}
 .stats-modal{max-width:420px}
 .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
