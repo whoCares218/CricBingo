@@ -106,12 +106,12 @@ select.input option{background:var(--sur);color:var(--txt)}
 @keyframes cell-fill-glow{0%{background:rgba(45,211,111,.25);box-shadow:0 0 20px rgba(45,211,111,.35)}100%{background:rgba(45,211,111,.09);box-shadow:none}}
 @keyframes check-appear{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
 .cell.wildcard-hint{border-color:var(--acc);background:var(--acc-dim);animation:wc-pulse 1.5s ease infinite}
-@keyframes wc-pulse{0%,100%{box-shadow:0 0 0 0 var(--acc-glow)}50%{box-shadow:0 0 0 6px var(--green)}}
+@keyframes wc-pulse{0%,100%{box-shadow:0 0 0 0 var(--acc-glow)}50%{box-shadow:0 0 0 6px rgba(245,166,35,0)}}
 .cell.wrong{animation:cell-shake .4s ease;border-color:var(--red);background:rgba(240,82,79,.08)}
 @keyframes cell-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
-.cell.wc-filled{background:var(--green);border-color:var(--green);cursor:default;animation:wc-fill .6s ease forwards}
+.cell.wc-filled{background:rgba(155,114,247,.1);border-color:rgba(155,114,247,.45);cursor:default;animation:wc-fill .6s ease forwards}
 .cell.wc-filled::after{content:'✦';position:absolute;bottom:6px;right:8px;font-size:.7rem;color:var(--green);font-weight:700;opacity:0;animation:check-appear .4s .2s ease forwards}
-@keyframes wc-fill{0%{background:var(--green);box-shadow:0 0 18px var(--green)}100%{background:var(--green);box-shadow:none}}
+@keyframes wc-fill{0%{background:rgba(155,114,247,.3);box-shadow:0 0 18px rgba(155,114,247,.35)}100%{background:rgba(155,114,247,.1);box-shadow:none}}
 .player-card{background:var(--sur);border:1px solid var(--bdr2);border-radius:var(--r-xl);padding:22px 26px;text-align:center}
 .player-name{font-family:var(--font-head);font-size:clamp(1.25rem,3.5vw,2rem);font-weight:800;color:var(--acc);letter-spacing:-.5px}
 .player-hint{font-size:.78rem;color:var(--txt3)}
